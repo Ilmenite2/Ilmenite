@@ -297,3 +297,17 @@
             background-color:rgb(170, 170, 170);
         }
     }
+
+    @media only screen and (max-width:1430px){
+        .W{
+            font-size:70px;
+            font-weight: bold;
+        }
+        .A{
+            font-size: 28px;
+            font-weight: bold;
+            width: 80%;
+            position: relative;
+            left: 10%;
+        }
+    }
