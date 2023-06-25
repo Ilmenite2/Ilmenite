@@ -54,7 +54,7 @@
         top: 10px;
         left: 80%;
         cursor: pointer;
-        font-size:40px;
+        font-size:30px;
         color: aliceblue;
         text-decoration: none;
     }
@@ -64,7 +64,7 @@
         top: 10px;
         left: 60%;
         cursor: pointer;
-        font-size:40px;
+        font-size:30px;
         color: aliceblue;
         text-decoration: none;
     }
@@ -74,13 +74,13 @@
         top: 10px;
         left: 40%;
         cursor: pointer;
-        font-size:40px;
+        font-size:30px;
         color: aliceblue;
         text-decoration: none;
     }
     .d1{
         width: 0.5px;
-        height: 50px;
+        height: 40px;
         position: absolute;
         top: 10px;
         left: 75%;
@@ -88,7 +88,7 @@
     }
     .d2{
         width: 0.5px;
-        height: 50px;
+        height: 40px;
         position: absolute;
         top: 10px;
         left: 55%;
@@ -185,7 +185,7 @@
             top: 70px;
             left: 90%;
             cursor: pointer;
-            font-size:27px;
+            font-size:30px;
             font-weight: bold;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: aliceblue;
@@ -196,7 +196,7 @@
             top: 70px;
             left: 50%;
             cursor: pointer;
-            font-size:27px;
+            font-size:30px;
             font-weight: bold;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: aliceblue;
@@ -206,7 +206,7 @@
             position: absolute;
             top: 70px;
             left: 43%;
-            font-size: 30px;
+            font-size: 40px;
             cursor: pointer;
             font-weight: bold;
         }
@@ -214,7 +214,7 @@
             position: absolute;
             top: 70px;
             left: 83%;
-            font-size: 30px;
+            font-size: 40px;
             cursor: pointer;
             font-weight: bold;
         }
@@ -223,7 +223,7 @@
             text-align: right;
             top: 45px;
             right: 20px;
-            font-size:20px;
+            font-size:30px;
             cursor:pointer;
             font-weight: bold;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -259,7 +259,7 @@
             top: 70px;
             left: 5%;
             cursor: pointer;
-            font-size:27px;
+            font-size:30px;
             font-weight: bold;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: aliceblue;
