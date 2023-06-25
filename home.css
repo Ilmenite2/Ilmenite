@@ -2,7 +2,6 @@
     *{
         padding: 0;
         margin: 0;
-        overflow: hidden;
     }
     .e{
         position: absolute;
@@ -14,6 +13,7 @@
     }
     body{
         background-color: black;
+        scroll-snap-type: none ;
     }
     .topbar{
         width: 100%;
@@ -176,21 +176,9 @@
         border-radius: 10px;
     }
 
-    @media only screen and (max-width:1430px){
-        *{
-            visibility: hidden;
-        }
-        body{
-            background-color: red;
-        }
-    }
-
 @media only screen and (max-width:1020px){
     *{
         visibility: hidden;
-    }
-    body{
-        background-color: black;
     }
     .e{
         visibility: visible;
