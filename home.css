@@ -175,19 +175,21 @@
         border-radius: 10px;
     }
 
+    @media only screen and (max-width:1430px){
+        *{
+            visibility: hidden;
+        }
+        body{
+            background-color: red;
+        }
+    }
 
-
-
-
-
-
-
-@media only screen and (max-width:1400px){
+@media only screen and (max-width:1020px){
     *{
         visibility: hidden;
     }
     body{
-        overflow: hiddens;
+        background-color: black;
     }
     .e{
         visibility: visible;
