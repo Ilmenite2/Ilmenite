@@ -1,0 +1,80 @@
+.instagram:hover{
+    transform: translateY(-10px);
+    background-image: linear-gradient(rgb(64, 93, 230), rgb(253, 29, 29),rgb(252, 175, 69) );
+    box-shadow: 0 0 20px gold;
+}
+.tiktok:hover{
+    transition:all 0.5s;
+    transform: translateY(-10px);
+    background-image: linear-gradient(to right,cyan,black,red);
+    box-shadow: 0 0 20px cyan;
+}
+.youtube:hover{
+    transform: translateY(-10px);
+    background-color: red;
+    box-shadow: 0 0 20px red;
+}
+.game:hover{
+    transform: translateY(-10px);
+    color: goldenrod;
+}
+.news:hover{
+    transform: translateY(-10px);
+    color: goldenrod;
+}
+.market:hover{
+    transform: translateY(-10px);
+    color: goldenrod;
+}
+.ABB:hover{
+    box-shadow: 0 0 20px goldenrod;
+    transition:all 0.5s;
+    transform: translateY(-5px);
+    background-color: black;
+    color: goldenrod;
+    transition-duration:all 0.5s;
+}
+.aboutus:hover{
+    box-shadow: 0 0 20px goldenrod;
+    transform: translateY(-5px);
+    background-color: black;
+    color: goldenrod;
+    transition-duration:all 0.5s;
+}
+.home:hover{
+    box-shadow: 0 0 20px goldenrod;
+    transition:all 0.5s;
+    transform: translateY(-5px);
+    background-color: black;
+    color: goldenrod;
+    transition-duration:all 0.5s;
+}
+.M:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.Tz:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.Az:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.C:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.Bz:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.shop::-webkit-scrollbar-thumb:hover{
+    background-color:goldenrod;
+}
+.shop::-webkit-scrollbar:hover{
+    width: 20px;
+}
+input[type="radio"]:hover + label::before{
+    opacity: 100%;
+}

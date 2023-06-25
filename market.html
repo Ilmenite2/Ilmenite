@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Market.css">
+    <link rel="stylesheet" href="T&A.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="topbar">
+        <div class="GL1"></div>
+            <div class="T">
+            <img class="logo" src="C:\Users\Vampy\Desktop\website\images\ilmenite.png">
+            <h1 class="I">Ilmenite</h1>
+            <div class="marketi">Market</div>
+            <a class="news" href="news.html">News</a>
+            <a class="game" href="game.html">Games</a>
+            <t class="d1"></t> 
+            <t class="d2"></t>
+        </div>
+        <button class="home" onclick="location.href ='Hhome.html'">Home</button>
+    </div>
+    <div class="shop">
+        <div class="row1">
+            <div class="item">
+                <div class="discription">
+                    <div class="dd">
+                        <p class="discribee">This rim is avalable on Turbo Squid and CGtrader currenty!</p>
+                    </div>
+        
+                    <div id="Mmm" onclick="translateDiv()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb" class="Bz" onclick="resetTransform()"><p onclick="resetTransform()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Ttt" class="Tz"  onclick="openLink('https://www.squid.io/turbosquid/products/2082046/edit')">
+                        <p class="Tt">Via <br> Turbo Squid</p>
+                    </div>
+                      
+                    <div id="Ccc" class="C" onclick="openLink('https://www.cgtrader.com/3d-models/car/sport-car/hre-540c-3pc-wheel')">
+                        <p class="Cc">Via <br>CGtrader</p>
+                    </div>
+        
+                    <p class="titlee">hre-540c-3pc</p>
+                    <p class="prisee">prise: 2.50$</p>
+                    <script>
+                        
+                        function translateDiv() {
+                        var divMm = document.getElementById("Mmm");
+                        var divTt = document.getElementById("Ttt");
+                        var divCc = document.getElementById("Ccc");
+                        divBb = document.getElementById("Bbb");
+        
+                        if (divMm) {
+                            divBb.style.transform = "translateX(-300px)";
+                            divMm.style.transform = "translateX(-350px)";
+                            divTt.style.transform = "translateY(-275px)";
+                            divCc.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform(){
+                        var divBb = document.getElementById("Bbb");
+                        var divTt = document.getElementById("Ttt");
+                        var divCc = document.getElementById("Ccc");
+                        divMm = document.getElementById("Mmm");
+        
+                        if (divBb) {
+                            divBb.style.transform = "translateX(0px)";
+                            divTt.style.transform = "translateY(0px)";
+                            divCc.style.transform = "translateY(0px)";
+                            divMm.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad">
+                        <img class="img" src="C:\Users\Vampy\Desktop\website\images\slideimgs\CGT3pc.png">
+                        <img class="img" src="C:\Users\Vampy\Desktop\website\images\slideimgs\CGT3pc3.png">
+                        <img class="img" src="C:\Users\Vampy\Desktop\website\images\slideimgs\CGT3pc4.png">
+                        <img class="img" src="C:\Users\Vampy\Desktop\website\images\slideimgs\CGT3pc5.png">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" name="slide" id="slide1" onclick="switchImages()"checked>
+                        <label for="slide1"></label>
+                        <input type="radio" name="slide" id="slide2" onclick="switchImages()">
+                        <label for="slide2"></label>
+                        <input type="radio" name="slide" id="slide3" onclick="switchImages()">
+                        <label for="slide3"></label>
+                        <input type="radio" name="slide" id="slide4" onclick="switchImages()">
+                        <label for="slide4"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="item1">
+                <div class="discription">
+                    <div class="dd">
+                        <p class="discribee">This rim is avalable on Turbo Squid and CGtrader currenty!</p>
+                    </div>
+        
+                    <div id="Mmm1" onclick="translateDiv1()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb1" class="Bz" onclick="resetTransform1()"><p onclick="resetTransform()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Ttt1" class="Tz"  onclick="openLink('https://www.turbosquid.com/FullPreview/2082056')">
+                        <p class="Tt">Via <br> Turbo Squid</p>
+                    </div>
+                      
+                    <div id="Ccc1" class="C" onclick="openLink('https://www.cgtrader.com/3d-models/car/sport-car/rays-volk-racing-wheel')">
+                        <p class="Cc">Via <br>CGtrader</p>
+                    </div>
+        
+                    <p class="titlee1">rays volk-racing wheel</p>
+                    <p class="prisee1">prise:2.50$</p>
+                    <script>
+                        
+                        function translateDiv1() {
+                        var divMm1 = document.getElementById("Mmm1");
+                        var divTt1 = document.getElementById("Ttt1");
+                        var divCc1 = document.getElementById("Ccc1");
+                        divBb1 = document.getElementById("Bbb1");
+        
+                        if (divMm1) {
+                            divBb1.style.transform = "translateX(-300px)";
+                            divMm1.style.transform = "translateX(-350px)";
+                            divTt1.style.transform = "translateY(-275px)";
+                            divCc1.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform1(){
+                        var divBb1 = document.getElementById("Bbb1");
+                        var divTt1 = document.getElementById("Ttt1");
+                        var divCc1 = document.getElementById("Ccc1");
+                        divMm1 = document.getElementById("Mmm1");
+        
+                        if (divBb1) {
+                            divBb1.style.transform = "translateX(0px)";
+                            divTt1.style.transform = "translateY(0px)";
+                            divCc1.style.transform = "translateY(0px)";
+                            divMm1.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad1">
+                        <img class="img" src="images\slideimgs\CGTRay.png">
+                        <img class="img" src="images\slideimgs\CGTRay1.png">
+                        <img class="img" src="images\slideimgs\CGTRay4.png">
+                        <img class="img" src="images\slideimgs\CGTRay5.png">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" name="slide" id="slide5" onclick="switchImages()"checked>
+                        <label for="slide5"></label>
+                        <input type="radio" name="slide" id="slide6" onclick="switchImages()">
+                        <label for="slide6"></label>
+                        <input type="radio" name="slide" id="slide7" onclick="switchImages()">
+                        <label for="slide7"></label>
+                        <input type="radio" name="slide" id="slide8" onclick="switchImages()">
+                        <label for="slide8"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="item2">
+                <div class="discription">
+                    <div class="dd">
+                        <p class="discribee">Grip Strengthener ,5-60 kg Adjustable Hand Trainer Forearm Strengthener</p>
+                    </div>
+        
+                    <div id="Mmm2" onclick="translateDiv2()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb2" class="Bz" onclick="resetTransform2()"><p onclick="resetTransform()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Aaa" class="Az"  onclick="openLink('https://amzn.to/3Xm35N8')">
+                        <p class="Aa">Via <br> Amazon </p>
+                    </div>
+        
+                    <p class="titlee2">Grip Strengthener</p>
+                    <p class="prisee2">prise:6.45$</p>
+                    <script>
+                        
+                        function translateDiv2() {
+                        var divMm2 = document.getElementById("Mmm2");
+                        var divAa = document.getElementById("Aaa");
+                        divBb2 = document.getElementById("Bbb2");
+        
+                        if (divMm2) {
+                            divBb2.style.transform = "translateX(-175px)";
+                            divMm2.style.transform = "translateX(-350px)";
+                            divAa.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform2(){
+                        var divBb2 = document.getElementById("Bbb2");
+                        var divAa = document.getElementById("Aaa");
+                        divMm2 = document.getElementById("Mmm2");
+        
+                        if (divBb2) {
+                            divBb2.style.transform = "translateX(0px)";
+                            divAa.style.transform = "translateY(0px)";
+                            divMm2.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad2">
+                        <img class="img" src="images\slideimgs\HG1.jpg">
+                        <img class="img" src="images\slideimgs\HG2.jpg">
+                        <img class="img" src="images\slideimgs\HG3.jpg">
+                        <img class="img" src="images\slideimgs\HG4.jpg">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" name="slide" id="slide9" onclick="switchImages()"checked>
+                        <label for="slide9"></label>
+                        <input type="radio" name="slide" id="slide10" onclick="switchImages()">
+                        <label for="slide10"></label>
+                        <input type="radio" name="slide" id="slide11" onclick="switchImages()">
+                        <label for="slide11"></label>
+                        <input type="radio" name="slide" id="slide12" onclick="switchImages()">
+                        <label for="slide12"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row2">
+            <div class="item">
+            </div>
+            <div class="item1">
+            </div>
+            <div class="item2">
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchImages() {
+            var radio1 = document.getElementById('slide1');
+            var radio2 = document.getElementById('slide2');
+            var radio3 = document.getElementById('slide3');
+            var radio4 = document.getElementById('slide4');
+            var radio5 = document.getElementById('slide5');
+            var radio6 = document.getElementById('slide6');
+            var radio7 = document.getElementById('slide7');
+            var radio8 = document.getElementById('slide8');
+            var radio9 = document.getElementById('slide9');
+            var radio10 = document.getElementById('slide10');
+            var radio11 = document.getElementById('slide11');
+            var radio12 = document.getElementById('slide12');
+
+            var ad = document.querySelector('.ad');
+            var ad1 = document.querySelector('.ad1');
+            var ad2 = document.querySelector('.ad2');
+
+
+            if (radio1.checked) {
+                ad.style.transform = 'translateX(0)';
+            } else if (radio2.checked) {
+                ad.style.transform = 'translateX(-390px)';
+            } else if (radio3.checked) {
+                ad.style.transform = 'translateX(-780px)';
+            } else if (radio4.checked) {
+                ad.style.transform = 'translateX(-1170px)';
+            }
+
+            else if (radio5.checked) {
+                ad1.style.transform = 'translateX(0)';
+            } else if (radio6.checked) {
+                ad1.style.transform = 'translateX(-390px)';
+            } else if (radio7.checked) {
+                ad1.style.transform = 'translateX(-780px)';
+            } else if (radio8.checked) {
+                ad1.style.transform = 'translateX(-1170px)';
+            }
+
+            else if (radio9.checked) {
+                ad2.style.transform = 'translateX(0)';
+            } else if (radio10.checked) {
+                ad2.style.transform = 'translateX(-380px)';
+            } else if (radio11.checked) {
+                ad2.style.transform = 'translateX(-770px)';
+            } else if (radio12.checked) {
+                ad2.style.transform = 'translateX(-1158px)';
+            }
+            ad.style.transition = 'transform 0.3s ease';
+            ad1.style.transition = 'transform 0.3s ease';
+            ad2.style.transition = 'transform 0.3s ease';
+        }
+    </script>
+</body>
+</html>

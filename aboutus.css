@@ -1,0 +1,299 @@
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background: linear-gradient(to right, black, goldenrod,black);
+    }
+    .topbar{
+        width: 100%;
+        height: 100px;
+        background-color: rgb(25, 25, 25);
+        color: aliceblue;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .GL1{
+        width: 100%;
+        height: 5px;
+        background-color: goldenrod;
+    }
+    .T{
+        position: absolute;
+        top: 20px;
+        left: 5%;
+        width: 75%;
+        
+    }
+    .logo{
+        width: 75px;
+    }
+    .I{
+        position: absolute;
+        top: 5px;
+        left: 80px;
+        font-size: 50px;
+    }
+   .home{
+    transition:all 0.5s;
+    background-color: aliceblue;
+    width: 190px;
+    height: 55px;
+    position: absolute;
+    text-align: center;
+    top: 27.5px;
+    border-radius: 25px;
+    right: 5px;
+    font-size:40px;
+    cursor:pointer;
+    color: black;
+    text-decoration: none;
+    }
+    .market{
+        transition:all 0.5s;
+        position: absolute;
+        top: 10px;
+        left: 80%;
+        cursor: pointer;
+        font-size:40px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .news{
+        transition:all 0.5s;
+        position: absolute;
+        top: 10px;
+        left: 60%;
+        cursor: pointer;
+        font-size:40px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .game{
+        transition:all 0.5s;
+        position: absolute;
+        top: 10px;
+        left: 40%;
+        cursor: pointer;
+        font-size:40px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .d1{
+        width: 0.5px;
+        height: 50px;
+        position: absolute;
+        top: 10px;
+        left: 75%;
+        background-color: aliceblue;
+    }
+    .d2{
+        width: 0.5px;
+        height: 50px;
+        position: absolute;
+        top: 10px;
+        left: 55%;
+        background-color: aliceblue;
+    }
+    .Text{
+        position:absolute;
+        left: 12.5%;
+        width: 75%;
+        height: 900px;
+        text-align: center;
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color:black;
+        background-color:gainsboro;
+        border-radius: 20px;
+        box-shadow: 0px 0px 40px;
+    }
+    .W{
+        font-size:80px;
+        font-weight: bold;
+    }
+    .A{
+        font-size: 30px;
+        font-weight: bold;
+        width: 80%;
+        position: relative;
+        left: 10%;
+    }
+    .sighn{
+        width: 200px;
+        position: absolute;
+        left: 70%;
+    }
+    .B1{
+        width: 170px;
+        position: absolute;
+        left: 10%;
+        border-radius: 20px;
+    }
+    .B2{
+        width: 170px;
+        position: absolute;
+        left: 30%;
+        border-radius: 20px;
+    }
+    .B3{
+        width: 170px;
+        position: absolute;
+        left: 50%;
+        border-radius: 20px;
+    }
+    .b{
+        position:absolute;
+        width: 100%;
+        top: 670px;
+        height: 170px;
+        background-color:rgb(170, 170, 170);
+    }
+    @media only screen and (max-width:412px){
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .topbar{
+            width: 100%;
+            height: 150px;
+            background-color: rgb(25, 25, 25);
+            color: aliceblue;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .GL1{
+            width: 100%;
+            height: 10px;
+            background-color: goldenrod;
+        }
+        .T{
+            position: absolute;
+            top: 20px;
+            left: 2%;
+            width: 75%;
+            
+        }
+        .logo{
+            width: 75px;
+        }
+        .I{
+            position: absolute;
+            top: 10px;
+            left: 80px;
+            font-size: 40px;
+        }
+        .market{
+            position: absolute;
+            top: 70px;
+            left: 90%;
+            cursor: pointer;
+            font-size:30px;
+            font-weight: bold;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .news{
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            cursor: pointer;
+            font-size:30px;
+            font-weight: bold;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .d1{
+            position: absolute;
+            top: 70px;
+            left: 43%;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .d2{
+            position: absolute;
+            top: 70px;
+            left: 83%;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .home{
+            position: absolute;
+            text-align: right;
+            top: 45px;
+            right: 20px;
+            font-size:20px;
+            cursor:pointer;
+            font-weight: bold;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .Text{
+            position:absolute;
+            left: 20px;
+            width: 90%;
+            top:180px;
+            height: 700px;
+            text-align: center;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color:black;
+            background-color:gainsboro;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px;
+        }
+        .W{
+            font-size:30px;
+            font-weight: bold;
+        }
+        .A{
+            font-size: 16px;
+            font-weight: bold;
+            width: 80%;
+            position: relative;
+            left: 10%;
+        }
+        .game{
+            position: absolute;
+            top: 70px;
+            left: 5%;
+            cursor: pointer;
+            font-size:30px;
+            font-weight: bold;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .sighn{
+            width: 150px;
+            position: absolute;
+            left: 6 0%;
+        }
+        .B1{
+            width: 70px;
+            position: absolute;
+            left: 5%;
+            border-radius: 20px;
+        }
+        .B2{
+            width: 70px;
+            position: absolute;
+            bottom: 0px;
+            left: 23%;
+            border-radius: 20px;
+        }
+        .B3{
+            width: 70px;
+            position: absolute;
+            left: 40%;
+            border-radius: 20px;
+        }
+        .b{
+            position:absolute;
+            width: 100%;
+            top: 500px;
+            height: 125px;
+            background-color:rgb(170, 170, 170);
+        }
+    }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="T&A.css">
+    <link rel="stylesheet" href="Ads.css">
+    
+    <title>Home</title>
+</head>
+<body>
+    <p class="e">
+        The web site is not yet available for this screen size :( 
+         ,it will be available on later updates ,
+    </p>
+    <p class="e1">
+         but you can visit your web site by watching this 60-second video.
+         it will show you how to get access to the web site ;).
+    </p>
+    <div class="topbar">
+        <div class="GL1"></div>
+            <div class="T">
+            <img class="logo" src="C:\Users\Vampy\Desktop\website\images\ilmenite.png">
+            <h1 id="tt" class="I">Ilmenite</h1>
+            <a class="market" href="market.html">Market</a>
+            <a class="news" href="news.html">News</a>
+            <a class="game" href="game.html">Games</a>
+            <t class="d1"></t> 
+            <t class="d2"></t>
+        </div>
+        <button class="aboutus" onclick="location.href ='Aboutus.html'">About Us</button>
+    </div>
+    <div class="sidebar">
+        <a href="https://www.instagram.com/ilmenite_2/" target="_blank">
+            <img class="instagram" src="C:\Users\Vampy\Desktop\website\images\ig.png">
+        </a>
+        <a href="https://www.tiktok.com/@ilmenite2" target="_blank">
+            <img class="tiktok" src="C:\Users\Vampy\Desktop\website\images\TT.png">
+        </a>
+        <a href="https://www.youtube.com/channel/UCa1E_HOGb2I5xij2EUxQE4A" target="_blank">
+            <img class="youtube" src="C:\Users\Vampy\Desktop\website\images\yt.png">
+        </a>
+        <p class="pp">follow our social media to stay up to date with our content</p>
+        <div class="d3"></div>
+        <div class="d4"></div>
+    </div>
+    <div class="slide">
+        <div class="discription">
+            <div class="dd"></div>
+
+            <div id="Mmm" onclick="translateDiv()" class="M"><p class="Mm">purchace</p></div>
+            <div id="Bbb" class="Bz" onclick="resetTransform()"><p onclick="resetTransform()" class="Bb">Cancel</p></div>
+            
+            <div id="Aaa" class="Az"  onclick="openLink('https://amzn.to/3Xm35N8')">
+                <p class="Aa">Via <br> Amazon </p>
+            </div>
+
+            <p class="titlee">Grip Strengthener</p>
+            <p class="prisee">prise:6.45$</p>
+            <p class="discribee">Grip Strengthener ,5-60 kg Adjustable Hand Trainer Forearm Strengthener</p>
+            <script>
+                        
+                function translateDiv() {
+                var divMm2 = document.getElementById("Mmm");
+                var divAa = document.getElementById("Aaa");
+                divBb2 = document.getElementById("Bbb");
+
+                if (divMm2) {
+                    divBb2.style.transform = "translateX(-160px)";
+                    divMm2.style.transform = "translateX(-350px)";
+                    divAa.style.transform = "translateY(-125px)";
+                }
+            }
+
+            function resetTransform(){
+                var divBb2 = document.getElementById("Bbb");
+                var divAa = document.getElementById("Aaa");
+                divMm2 = document.getElementById("Mmm");
+
+                if (divBb2) {
+                    divBb2.style.transform = "translateX(0px)";
+                    divAa.style.transform = "translateY(0px)";
+                    divMm2.style.transform = "translateX(0px)";
+                }
+            }
+            function openLink(url) {
+                window.open(url, '_blank');
+            }
+        </script>
+        </div>
+        <div class="disply">
+            <div class="ad">
+                <img class="img" src="images\slideimgs\HG1.jpg">
+                        <img class="img" src="images\slideimgs\HG2.jpg">
+                        <img class="img" src="images\slideimgs\HG3.jpg">
+                        <img class="img" src="images\slideimgs\HG4.jpg">
+            </div>
+            <div class="btns">
+                <input type="radio" name="slide" id="slide1" onclick="switchImages()"checked>
+                <label for="slide1"></label>
+                <input type="radio" name="slide" id="slide2" onclick="switchImages()">
+                <label for="slide2"></label>
+                <input type="radio" name="slide" id="slide3" onclick="switchImages()">
+                <label for="slide3"></label>
+                <input type="radio" name="slide" id="slide4" onclick="switchImages()">
+                <label for="slide4"></label>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchImages() {
+            var radio1 = document.getElementById('slide1');
+            var radio2 = document.getElementById('slide2');
+            var radio3 = document.getElementById('slide3');
+            var radio4 = document.getElementById('slide4');
+
+            var ad = document.querySelector('.ad');
+
+            if (radio1.checked) {
+                ad.style.transform = 'translateX(0%)';
+            } else if (radio2.checked) {
+                ad.style.transform = 'translateX(-487px)';
+            } else if (radio3.checked) {
+                ad.style.transform = 'translateX(-987px)';
+            } else if (radio4.checked) {
+                ad.style.transform = 'translateX(-1485px)';
+            }
+            ad.style.transition = 'transform 0.3s ease';
+        }
+
+        var radio1 = document.getElementById('slide1');
+        var radio2 = document.getElementById('slide2');
+
+        radio1.addEventListener('change', switchImages);
+        radio2.addEventListener('change', switchImages);
+    </script>
+</body>
+</html>
