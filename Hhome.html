@@ -50,41 +50,14 @@
         <div class="discription">
             <div class="dd"></div>
 
-            <div id="Mmm" onclick="translateDiv()" class="M"><p class="Mm">purchace</p></div>
-            <div id="Bbb" class="Bz" onclick="resetTransform()"><p onclick="resetTransform()" class="Bb">Cancel</p></div>
-            
             <div id="Aaa" class="Az"  onclick="openLink('https://amzn.to/3Xm35N8')">
-                <p class="Aa">Via <br> Amazon </p>
+                <p class="Aa">Purchace Via <br> Amazon </p>
             </div>
 
             <p class="titlee">Grip Strengthener</p>
             <p class="prisee">prise:6.45$</p>
             <p class="discribee">Grip Strengthener ,5-60 kg Adjustable Hand Trainer Forearm Strengthener</p>
             <script>
-                        
-                function translateDiv() {
-                var divMm2 = document.getElementById("Mmm");
-                var divAa = document.getElementById("Aaa");
-                divBb2 = document.getElementById("Bbb");
-
-                if (divMm2) {
-                    divBb2.style.transform = "translateX(-160px)";
-                    divMm2.style.transform = "translateX(-350px)";
-                    divAa.style.transform = "translateY(-125px)";
-                }
-            }
-
-            function resetTransform(){
-                var divBb2 = document.getElementById("Bbb");
-                var divAa = document.getElementById("Aaa");
-                divMm2 = document.getElementById("Mmm");
-
-                if (divBb2) {
-                    divBb2.style.transform = "translateX(0px)";
-                    divAa.style.transform = "translateY(0px)";
-                    divMm2.style.transform = "translateX(0px)";
-                }
-            }
             function openLink(url) {
                 window.open(url, '_blank');
             }

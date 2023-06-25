@@ -104,27 +104,6 @@ input[type="radio"] {
   }
   .Az{
     transition: 500ms;
-    width: 225px;
-    height: 100px;
-    position: absolute;
-    top: 500px;
-    left:7.5%;
-    background-color: black;
-    border-radius: 10px;
-    overflow: hidden;
-    border: solid 1px goldenrod;
-  }
-  .Aa{
-    text-align: center;
-    position: absolute;
-    top: 400px;
-    left: 20%;
-    top: 2px;
-    color: aliceblue;
-    font-size: 35px;
-  }
-  .M{
-    transition: 500ms;
     width: 200px;
     height: 75px;
     position: absolute;
@@ -136,78 +115,11 @@ input[type="radio"] {
     overflow: hidden;
     border: solid 1px goldenrod;
   }
-  .Mm{
+  .Aa{
     position: absolute;
-    top: 400px;
-    left: 12%;
-    top: 13px;
-    color: aliceblue;
-    font-size: 35px;
-  }
-  .Tz{
-    transition: 500ms;
-    width: 170px;
-    height: 75px;
-    position: absolute;
-    top: 500px;
-    left:5%;
-    background-color: black;
-    color: aliceblue;
-    border-radius: 10px;
-    overflow: hidden;
-    border: solid 1px goldenrod;
-  }
-  .Tt{
-    text-align: center;
-    position: absolute;
-    top: 400px;
-    left: 7%;
-    top: 13px;
-    color: aliceblue;
-    font-size: 25px;
-  }
-  .C{
-    transition: 500ms;
-    width: 170px;
-    height: 75px;
-    position: absolute;
-    top: 500px;
-    right: 5%;
-    background-color: black;
-    color: aliceblue;
-    border-radius: 10px;
-    overflow: hidden;
-    border: solid 1px goldenrod;
-  }
-  .Cc{
-    text-align: center;
-    position: absolute;
-    top: 400px;
-    left: 18%;
-    top: 13px;
-    color: aliceblue;
-    font-size: 25px;
-  }
-  .Bz{
-    transition: 500ms;
-    width: 115px;
-    height: 40px;
-    position: absolute;
-    top: 400px;
-    right: -150px;
-    background-color: black;
-    color: aliceblue;
-    border-radius: 10px;
-    overflow: hidden;
-    border: solid 1px goldenrod;
-  }
-  .Bb{
-    text-align: center;
-    position: absolute;
-    top: 400px;
-    left: 15%;
+    left: 25px;
     top: 5px;
     color: aliceblue;
     font-size: 25px;
+    text-align: center;
   }
-  
