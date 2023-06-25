@@ -186,6 +186,9 @@
     *{
         visibility: hidden;
     }
+    body{
+        overflow: hidden;
+    }
     .e{
         visibility: visible;
         color: aliceblue;
