@@ -181,7 +181,7 @@
                     </div>
         
                     <p class="titlee2">Grip Strengthener</p>
-                    <p class="prisee2">prise:6.45$</p>
+                    <p class="prisee2">prise:6.45€</p>
                     <script>
                         
                         function translateDiv2() {
@@ -234,6 +234,69 @@
         </div>
         <div class="row2">
             <div class="item">
+                <div class="discription">
+                    <div class="dd1">
+                        <p class="discribee1">24 Inch (60 cm Screen) Full HD, 165Hz, 1ms (VRB), HDMI 2.0, DP 1.2, AMD FreeSync Premium, Black <br> <br> <b>(Free Shipping)</b></p>
+                    </div>
+        
+                    <div id="Mmm3" onclick="translateDiv3()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb3" class="Bz" onclick="resetTransform3()"><p onclick="resetTransform3()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Aaa1" class="Az"  onclick="openLink('https://amzn.to/3Pu4q2q')">
+                        <p class="Aa">Via <br> Amazon </p>
+                    </div>
+        
+                    <p class="titlee3">Acer KG241YS Monitor</p>
+                    <div class="D"><b>-13%</b>  <del>159.00€</del> </div>
+                    <p class="prisee3">prise:139.00€</p>
+                    <script>
+                        
+                        function translateDiv3() {
+                        var divMm = document.getElementById("Mmm3");
+                        var divAa = document.getElementById("Aaa1");
+                        divBb = document.getElementById("Bbb3");
+        
+                        if (divMm) {
+                            divBb.style.transform = "translateX(-175px)";
+                            divMm.style.transform = "translateX(-350px)";
+                            divAa.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform3(){
+                        var divBb = document.getElementById("Bbb3");
+                        var divAa = document.getElementById("Aaa1");
+                        divMm = document.getElementById("Mmm3");
+        
+                        if (divBb) {
+                            divBb.style.transform = "translateX(0px)";
+                            divAa.style.transform = "translateY(0px)";
+                            divMm.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad3">
+                        <img class="img" src="images\slideimgs\AM.png">
+                        <img class="img" src="images\slideimgs\AM1.png">
+                        <img class="img" src="images\slideimgs\AM2.png">
+                        <img class="img" src="images\slideimgs\AM3.png">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" name="slide" id="slide13" onclick="switchImages()"checked>
+                        <label for="slide13"></label>
+                        <input type="radio" name="slide" id="slide14" onclick="switchImages()">
+                        <label for="slide14"></label>
+                        <input type="radio" name="slide" id="slide15" onclick="switchImages()">
+                        <label for="slide15"></label>
+                        <input type="radio" name="slide" id="slide16" onclick="switchImages()">
+                        <label for="slide16"></label>
+                    </div>
+                </div>
             </div>
             <div class="item1">
             </div>
@@ -255,30 +318,35 @@
             var radio10 = document.getElementById('slide10');
             var radio11 = document.getElementById('slide11');
             var radio12 = document.getElementById('slide12');
+            var radio13 = document.getElementById('slide13');
+            var radio14 = document.getElementById('slide14');
+            var radio15 = document.getElementById('slide15');
+            var radio16 = document.getElementById('slide16');
 
             var ad = document.querySelector('.ad');
             var ad1 = document.querySelector('.ad1');
             var ad2 = document.querySelector('.ad2');
+            var ad3 = document.querySelector('.ad3');
 
 
             if (radio1.checked) {
                 ad.style.transform = 'translateX(0)';
             } else if (radio2.checked) {
-                ad.style.transform = 'translateX(-390px)';
+                ad.style.transform = 'translateX(-100%)';
             } else if (radio3.checked) {
-                ad.style.transform = 'translateX(-780px)';
+                ad.style.transform = 'translateX(-200%)';
             } else if (radio4.checked) {
-                ad.style.transform = 'translateX(-1170px)';
+                ad.style.transform = 'translateX(-300%)';
             }
 
             else if (radio5.checked) {
                 ad1.style.transform = 'translateX(0)';
             } else if (radio6.checked) {
-                ad1.style.transform = 'translateX(-390px)';
+                ad1.style.transform = 'translateX(-100%)';
             } else if (radio7.checked) {
-                ad1.style.transform = 'translateX(-780px)';
+                ad1.style.transform = 'translateX(-200%)';
             } else if (radio8.checked) {
-                ad1.style.transform = 'translateX(-1170px)';
+                ad1.style.transform = 'translateX(-300%)';
             }
 
             else if (radio9.checked) {
@@ -290,9 +358,21 @@
             } else if (radio12.checked) {
                 ad2.style.transform = 'translateX(-1158px)';
             }
+
+            else if (radio13.checked) {
+                ad3.style.transform = 'translateX(0)';
+            } else if (radio14.checked) {
+                ad3.style.transform = 'translateX(-100%)';
+            } else if (radio15.checked) {
+                ad3.style.transform = 'translateX(-200%)';
+            } else if (radio16.checked) {
+                ad3.style.transform = 'translateX(-300%)';
+            }
             ad.style.transition = 'transform 0.3s ease';
             ad1.style.transition = 'transform 0.3s ease';
             ad2.style.transition = 'transform 0.3s ease';
+            ad3.style.transition = 'transform 0.3s ease';
+
         }
     </script>
 </body>
