@@ -172,6 +172,10 @@ text-decoration: none;
   height: 100%;
   display: flex;
 }
+.ad4{
+  height: 100%;
+  display: flex;
+}
 .img{
   width: 390px;
 }
@@ -255,6 +259,14 @@ input[type="radio"] {
     font-size: 25px;
     font-weight: bold;
   }
+  .titlee4{
+    color: aliceblue;
+    position:relative;
+    left: 30px;
+    top: 7px;
+    font-size: 25px;
+    font-weight: bold;
+  }
   .prisee{
     color:goldenrod;
     position:relative;
@@ -283,6 +295,13 @@ input[type="radio"] {
     top: -30px;
     font-size: 35px;
   }
+.prisee4{
+  color:goldenrod;
+  position:relative;
+  left: 60px;
+  top: 10px;
+  font-size: 35px;
+}
   .discribee{
     color:aliceblue;
     position:absolute;
@@ -300,6 +319,15 @@ input[type="radio"] {
     top: 5px;
     width: 370px;
     font-size: 20px;
+  }
+  .discribee2{
+    color:aliceblue;
+    position:relative;
+    text-align: center;
+    left: 10px;
+    top: 5px;
+    width: 370px;
+    font-size: 14px;
   }
   .dd{
     width: 100%;

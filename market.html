@@ -307,6 +307,68 @@
                 </div>
             </div>
             <div class="item1">
+                <div class="discription">
+                    <div class="dd1">
+                        <p class="discribee2"> <b>(Free Shipping)</b><br> <br>Gaming Laptop | 15.6 FHD 165Hz Display | Intel Core i7-12700H (2.30 GHz with up to 4.70 GHz Intel Turbo Boost Max Technology 3.0)| 16GB RAM | 512GB SSD | NVIDIA GeForce RTX 3060 | Windows 11 | TZ keyboard. Black</p>
+                    </div>
+        
+                    <div id="Mmm4" onclick="translateDiv4()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb4" class="Bz" onclick="resetTransform4()"><p onclick="resetTransform3()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Aaa2" class="Az"  onclick="openLink('https://amzn.to/46nQHjR')">
+                        <p class="Aa">Via <br> Amazon </p>
+                    </div>
+        
+                    <p class="titlee4">Acer Predator Helios 300</p>
+                    <p class="prisee4">price:1,699.00€</p>
+                    <script>
+                        
+                        function translateDiv4() {
+                        var divMm = document.getElementById("Mmm4");
+                        var divAa = document.getElementById("Aaa2");
+                        divBb = document.getElementById("Bbb4");
+        
+                        if (divMm) {
+                            divBb.style.transform = "translateX(-175px)";
+                            divMm.style.transform = "translateX(-350px)";
+                            divAa.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform4(){
+                        var divBb = document.getElementById("Bbb4");
+                        var divAa = document.getElementById("Aaa2");
+                        divMm = document.getElementById("Mmm4");
+        
+                        if (divBb) {
+                            divBb.style.transform = "translateX(0px)";
+                            divAa.style.transform = "translateY(0px)";
+                            divMm.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad4">
+                        <img class="img" src="images\slideimgs\AP.png">
+                        <img class="img" src="images\slideimgs\AP1.png">
+                        <img class="img" src="images\slideimgs\AP2.png">
+                        <img class="img" src="images\slideimgs\AP3.png">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" name="slide" id="slide17" onclick="switchImages()"checked>
+                        <label for="slide17"></label>
+                        <input type="radio" name="slide" id="slide18" onclick="switchImages()">
+                        <label for="slide18"></label>
+                        <input type="radio" name="slide" id="slide19" onclick="switchImages()">
+                        <label for="slide19"></label>
+                        <input type="radio" name="slide" id="slide20" onclick="switchImages()">
+                        <label for="slide20"></label>
+                    </div>
+                </div>
             </div>
             <div class="item2">
             </div>
@@ -330,11 +392,17 @@
             var radio14 = document.getElementById('slide14');
             var radio15 = document.getElementById('slide15');
             var radio16 = document.getElementById('slide16');
+            var radio17 = document.getElementById('slide17');
+            var radio18 = document.getElementById('slide18');
+            var radio19 = document.getElementById('slide19');
+            var radio20 = document.getElementById('slide20');
 
             var ad = document.querySelector('.ad');
             var ad1 = document.querySelector('.ad1');
             var ad2 = document.querySelector('.ad2');
             var ad3 = document.querySelector('.ad3');
+            var ad4 = document.querySelector('.ad4');
+
 
 
             if (radio1.checked) {
@@ -376,10 +444,21 @@
             } else if (radio16.checked) {
                 ad3.style.transform = 'translateX(-300%)';
             }
+            else if (radio17.checked) {
+                ad4.style.transform = 'translateX(0)';
+            } else if (radio18.checked) {
+                ad4.style.transform = 'translateX(-100%)';
+            } else if (radio19.checked) {
+                ad4.style.transform = 'translateX(-200%)';
+            } else if (radio20.checked) {
+                ad4.style.transform = 'translateX(-300%)';
+            }
             ad.style.transition = 'transform 0.3s ease';
             ad1.style.transition = 'transform 0.3s ease';
             ad2.style.transition = 'transform 0.3s ease';
             ad3.style.transition = 'transform 0.3s ease';
+            ad4.style.transition = 'transform 0.3s ease';
+
 
         }
     </script>
