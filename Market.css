@@ -325,9 +325,8 @@ input[type="radio"] {
     position:relative;
     text-align: center;
     left: 10px;
-    top: 5px;
     width: 370px;
-    font-size: 14px;
+    font-size: 17px;
   }
   .dd{
     width: 100%;
