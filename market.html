@@ -371,6 +371,76 @@
                 </div>
             </div>
             <div class="item2">
+                <div class="discription">
+                    <div class="dd1">
+                        <p class="discribee3"> <b>(Free Shipping)</b><br> <br>Intel Core i7 12700H 8GB RAM 500GB SSD RTX 3050 TI FreeDos 17.3" FHD 144Hz Gaming Laptop</p>
+                    </div>
+        
+                    <div id="Mmm5" onclick="translateDiv5()" class="M"><p class="Mm">purchace</p></div>
+                    <div id="Bbb5" class="Bz" onclick="resetTransform5()"><p onclick="resetTransform3()" class="Bb">Cancel</p></div>
+                    
+                    <div id="Aaa3" class="Az"  onclick="openLink('https://amzn.to/3r026WM')">
+                        <p class="Aa">Via <br> Amazon </p>
+                    </div>
+        
+                    <p class="titlee5">Tulpar A7 V14.3</p>
+                    <div class="D1"><b>-16%</b>  <del>1,069.00€</del> </div>
+                    <p class="prisee5">price:899.00€</p>
+                    <script>
+                        
+                        function translateDiv5() {
+                        var divMm = document.getElementById("Mmm5");
+                        var divAa = document.getElementById("Aaa3");
+                        divBb = document.getElementById("Bbb5");
+        
+                        if (divMm) {
+                            divBb.style.transform = "translateX(-175px)";
+                            divMm.style.transform = "translateX(-350px)";
+                            divAa.style.transform = "translateY(-275px)";
+                        }
+                    }
+        
+                    function resetTransform5(){
+                        var divBb = document.getElementById("Bbb5");
+                        var divAa = document.getElementById("Aaa3");
+                        divMm = document.getElementById("Mmm5");
+        
+                        if (divBb) {
+                            divBb.style.transform = "translateX(0px)";
+                            divAa.style.transform = "translateY(0px)";
+                            divMm.style.transform = "translateX(0px)";
+                        }
+                    }
+                    function openLink(url) {
+                        window.open(url, '_blank');
+                    }
+                </script>
+                </div>
+                <div class="disply">
+                    <div class="ad5">
+                        <img class="img" src="images\slideimgs\Ttt.jpg">
+                        <img class="img" src="images\slideimgs\Ttt1.jpg">
+                        <img class="img" src="images\slideimgs\Ttt2.jpg">
+                        <img class="img" src="images\slideimgs\Ttt3.jpg">
+                        <img class="img" src="images\slideimgs\Ttt4.jpg">
+                        <img class="img" src="images\slideimgs\Ttt5.jpg">
+                    </div>
+                    <div class="btns">
+                        <input type="radio" class="1" name="slide" id="slide21" onclick="switchImages()"checked>
+                        <label for="slide21"></label>
+                        <input type="radio" class="1" name="slide" id="slide22" onclick="switchImages()">
+                        <label for="slide22"></label>
+                        <input type="radio" class="1" name="slide" id="slide23" onclick="switchImages()">
+                        <label for="slide23"></label>
+                        <input type="radio" class="1" name="slide" id="slide24" onclick="switchImages()">
+                        <label for="slide24"></label>
+                        <input type="radio" class="1" name="slide" id="slide25" onclick="switchImages()">
+                        <label for="slide25"></label>
+                        <input type="radio" class="1" name="slide" id="slide26" onclick="switchImages()">
+                        <label for="slide26"></label>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -396,12 +466,21 @@
             var radio18 = document.getElementById('slide18');
             var radio19 = document.getElementById('slide19');
             var radio20 = document.getElementById('slide20');
+            var radio21 = document.getElementById('slide21');
+            var radio22 = document.getElementById('slide22');
+            var radio23 = document.getElementById('slide23');
+            var radio24 = document.getElementById('slide24');
+            var radio25 = document.getElementById('slide25');
+            var radio26 = document.getElementById('slide26');
+            
 
             var ad = document.querySelector('.ad');
             var ad1 = document.querySelector('.ad1');
             var ad2 = document.querySelector('.ad2');
             var ad3 = document.querySelector('.ad3');
             var ad4 = document.querySelector('.ad4');
+            var ad5 = document.querySelector('.ad5');
+
 
 
 
@@ -453,13 +532,25 @@
             } else if (radio20.checked) {
                 ad4.style.transform = 'translateX(-300%)';
             }
+            else if (radio21.checked) {
+                ad5.style.transform = 'translateX(0)';
+            } else if (radio22.checked) {
+                ad5.style.transform = 'translateX(-100%)';
+            } else if (radio23.checked) {
+                ad5.style.transform = 'translateX(-200%)';
+            } else if (radio24.checked) {
+                ad5.style.transform = 'translateX(-300%)';
+            } else if (radio25.checked) {
+                ad5.style.transform = 'translateX(-400%)';
+            } else if (radio26.checked) {
+                ad5.style.transform = 'translateX(-500%)';
+            }
             ad.style.transition = 'transform 0.3s ease';
             ad1.style.transition = 'transform 0.3s ease';
             ad2.style.transition = 'transform 0.3s ease';
             ad3.style.transition = 'transform 0.3s ease';
             ad4.style.transition = 'transform 0.3s ease';
-
-
+            ad5.style.transition = 'transform 0.3s ease';
         }
     </script>
 </body>
