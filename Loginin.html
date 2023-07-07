@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginin.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="topbar">
+        <div class="GL1"></div>
+            <div class="T">
+            <img class="logo" src="images\ilmenite.png">
+            <h1 id="tt" class="I">Ilmenite</h1>
+        </div>
+    </div>
+    <div class="container">
+        <form onsubmit="sendEmail(); reset(); return false;">
+            <h3>Enter your email and name to get identified by ilmenites</h3>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" >Send and enter the Academy</button>
+        </form>
+    </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail(){
+            Email.send({
+                Host : "smtp.gmail.com",
+                Username : "ilmenite.2008@gmail.com",
+                Password : "Ilmenite2008I",
+                To : 'ilmenite.2008@gmail.com',
+                From : document.getElementById("email").value,
+                Subject : "New student",
+                Body : "And this is the body"
+            }).then(
+                message => alert(message)
+            );
+        }
+    </script>
+</body>
+</html>
