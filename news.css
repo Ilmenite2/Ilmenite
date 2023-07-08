@@ -435,6 +435,15 @@ text-decoration: none;
     }
 }
 @media only screen and (max-width:1440px){
+    .newsi{
+        position: absolute;
+        top: 10px;
+        left: 58%;
+        cursor: pointer;
+        font-size:30px;
+        color: goldenrod;
+        text-decoration: none;
+    }
     .T1{
         color: aliceblue;
         position: absolute;
@@ -516,8 +525,8 @@ text-decoration: none;
     .IT2{
         position: absolute;
         left: 50px;
-        top: 0px;
-        width: 350px;
+        top: 30px;
+        width: 300px;
         border-radius: 10px;
     }
     .T3{
@@ -531,8 +540,8 @@ text-decoration: none;
     .IT3{
         position: absolute;
         right: -40px;
-        top: 0px;
-        width: 350px;
+        top: 30px;
+        width: 300px;
         border-radius: 10px;
     }
     .t3{
@@ -558,8 +567,8 @@ text-decoration: none;
     .IT4{
         position: absolute;
         left: 50px;
-        top: -30px;
-        width: 350px;
+        top: 10px;
+        width: 300px;
         border-radius: 10px;
     }
     .t4{
@@ -585,8 +594,8 @@ text-decoration: none;
     .IT5{
         position: absolute;
         right: -40px;
-        top: 20px;
-        width: 350px;
+        top: 40px;
+        width: 300px;
         border-radius: 10px;
     }
     .t5{
