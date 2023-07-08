@@ -298,7 +298,7 @@
         }
     }
 
-    @media only screen and (max-width:1430px){
+    @media only screen and (max-width:1440px){
         .W{
             font-size:70px;
             font-weight: bold;
@@ -309,5 +309,15 @@
             width: 80%;
             position: relative;
             left: 10%;
+        }
+        .news{
+            transition:all 0.5s;
+            position: absolute;
+            top: 10px;
+            left: 58%;
+            cursor: pointer;
+            font-size:30px;
+            color: aliceblue;
+            text-decoration: none;
         }
     }
