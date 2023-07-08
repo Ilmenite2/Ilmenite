@@ -107,7 +107,20 @@ text-decoration: none;
     text-align: center;
     width: 1000px;
     left: 25%;
-    top: 150px;
+    top: 120px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color:rgb(25, 25, 25);
+    border-radius: 10px;
+    border: solid 1px ghostwhite;
+}
+.Q{
+    color: aliceblue;
+    position: relative;
+    font-size: 30px;
+    text-align: center;
+    width: 1000px;
+    left: 25%;
+    top: 120px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color:rgb(25, 25, 25);
     border-radius: 10px;
@@ -175,7 +188,7 @@ text-decoration: none;
     font-size: 30px;
     width: 95%;
     left: 0px;
-    top: 350px;
+    top: 500px;
 }
 
 .IT2{
@@ -190,7 +203,7 @@ text-decoration: none;
     font-size: 35px;
     width: 95%;
     left: 0px;
-    top: 800px;
+    top: 950px;
 }
 
 .IT3{
@@ -278,6 +291,19 @@ text-decoration: none;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background-color:rgb(25, 25, 25);
         border-radius: 10px;
+        border: solid 1px ghostwhite;
+    }
+    .Q{
+        color: aliceblue;
+        position: relative;
+        font-size: 30px;
+        text-align: center;
+        width: 1000px;
+        left: 15%;
+        top: 150px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
         border: solid 1px goldenrod;
     }
     .Q1{
@@ -342,7 +368,7 @@ text-decoration: none;
         font-size: 30px;
         width: 95%;
         left: 0px;
-        top: 350px;
+        top: 500px;
     }
     
     .IT2{
@@ -357,7 +383,7 @@ text-decoration: none;
         font-size: 35px;
         width: 95%;
         left: 0px;
-        top: 800px;
+        top: 950px;
     }
     
     .IT3{
@@ -455,6 +481,19 @@ text-decoration: none;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background-color:rgb(25, 25, 25);
         border-radius: 10px;
+        border: solid 1px ghostwhite;
+    }
+    .Q{
+        color: aliceblue;
+        position: relative;
+        font-size: 30px;
+        text-align: center;
+        width: 1000px;
+        left: 8%;
+        top: 150px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
         border: solid 1px goldenrod;
     }
     .Q1{
@@ -519,7 +558,7 @@ text-decoration: none;
         font-size: 30px;
         width: 95%;
         left: 0px;
-        top: 350px;
+        top: 500px;
     }
     
     .IT2{
@@ -534,7 +573,7 @@ text-decoration: none;
         font-size: 35px;
         width: 95%;
         left: 0px;
-        top: 800px;
+        top: 900px;
     }
     
     .IT3{
