@@ -555,7 +555,7 @@ input[type="radio"] {
     transition:all 0.5s;
     position: absolute;
     top: 10px;
-    left: 56%;
+    left: 58%;
     cursor: pointer;
     font-size:30px;
     color: aliceblue;
