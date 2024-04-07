@@ -692,6 +692,59 @@ a{
         width: 80%;
         border-radius: 10px;
     }
+    .T3{
+        visibility: hidden;
+    }
+    
+    .IT3{
+        visibility: hidden;
+    }
+    .t3{
+        visibility: hidden;
+    }
+    .mobileT3{
+        position: absolute;
+        font-size: 15px;
+        width: 90%;
+        left: 0px;
+        top: 2000px;
+    }
+    
+    .mobileIT3{
+        position: absolute;
+        right: 0%;
+        top: 2000;
+        width: 90%;
+        border-radius: 10px;
+    }
+    .mobilet3{
+        color: aliceblue;
+        position: absolute;
+        width: 90%;
+        left: 0%;
+        top: -190px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
+        border: solid 10px rgb(25, 25, 25);
+        text-align: center;
+    }
+    .Q1{
+        visibility: hidden;
+    }
+    .mobileQ1{
+        color: aliceblue;
+        position: absolute;
+        font-size: 20px;
+        text-align: center;
+        width: 90%;
+        left: 5%;
+        top: 2400px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
+        border: solid 1px goldenrod;
+    }
 }
 @media only screen and (max-width:1650px){
     .Q{
