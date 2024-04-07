@@ -236,6 +236,7 @@ text-decoration: none;
     border: solid 1px goldenrod;
 }
 .Q3{
+    visibility: visible;
     color: aliceblue;
     position: relative;
     font-size: 30px;
@@ -633,6 +634,29 @@ a{
         position: absolute;
         top: -40px;
         right: 5%;
+    }
+    .Q3{
+        visibility: hidden;
+    }
+    .mobileQ3{
+        color: aliceblue;
+        position: relative;
+        font-size: 30px;
+        text-align: center;
+        width: 70%;
+        height: 400px;
+        left: 5%;
+        top: -50px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
+        border: solid 2px goldenrod;
+        overflow: scroll;
+    }
+    .qi{
+        width:300px;
+        border-radius: 2pc;
+        transition: 0.5s;
     }
 }
 @media only screen and (max-width:1650px){
