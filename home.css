@@ -3,14 +3,6 @@
         padding: 0;
         margin: 0;
     }
-    .e{
-        position: absolute;
-        visibility: hidden;
-    }
-    .e1{
-        position: absolute;
-        visibility: hidden;
-    }
     body{
         background-color: black;
         scroll-snap-type: none ;
@@ -201,11 +193,20 @@
         top: 65%;
     }
 
-
-@media only screen and (max-width:1200px){
-    *{
+    .mobilesidebar{
         visibility: hidden;
     }
+
+    .mobilemarket{
+        visibility: hidden;
+    }
+    .mobilenews{
+        visibility: hidden;
+    }
+    .mobilegame{
+        visibility: hidden;
+    }
+@media only screen and (max-width:1200px){
     .topbar{
         visibility: visible;
         width: 100%;
@@ -223,21 +224,21 @@
     .T{
         visibility: visible;
         position: absolute;
-        top: 20px;
-        left: 17%;
+        top: 15px;
+        left: 10%;
         width: 75%;
         
     }
     .logo{
         visibility: visible;
-        width: 75px;
+        width: 45px;
     }
     .I{
         visibility: visible;
         position: absolute;
         top: 5px;
-        left: 80px;
-        font-size: 50px;
+        left: 50px;
+        font-size: 30px;
     }
     .e{
         position: relative;
@@ -262,6 +263,167 @@
         top:20px;
         left: 10%;
     }
+    .aboutus{
+        transition:all 0.5s;
+        background-color: aliceblue;
+        width: 100px;
+        height: 30px;
+        position: absolute;
+        text-align: center;
+        top: 25px;
+        border-radius: 25px;
+        right: 50px;
+        font-size:20px;
+        cursor:pointer;
+        color: black;
+        text-decoration: none;
+    }
+    .market{
+        visibility: hidden;
+    }
+    .news{
+        visibility: hidden;
+    }
+
+    .game{
+        visibility: hidden;
+    }
+    .mobilemarket{
+        visibility: visible;
+        transition:all 0.5s;
+        position: absolute;
+        top: 52.5px;
+        right: -5%;
+        cursor: pointer;
+        font-size:20px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .mobilenews{
+        visibility: visible;
+        transition: all 0.5s;
+        position: absolute;
+        top: 52.5px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        font-size: 20px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    .mobilegame{
+        visibility: visible;
+        transition:all 0.5s;
+        position: absolute;
+        top: 52.5px;
+        left: -5%;
+        cursor: pointer;
+        font-size:20px;
+        color: aliceblue;
+        text-decoration: none;
+    }
+    .d1{
+        width: 0.5px;
+        height: 25px;
+        position: absolute;
+        top: 53px;
+        left: 75%;
+        background-color: aliceblue;
+    }
+    .d2{
+        width: 0.5px;
+        height: 25px;
+        position: absolute;
+        top: 53px;
+        left: 25%;
+        background-color: aliceblue;
+    }
+    .mobilesidebar{
+        visibility: visible;
+        position: absolute;
+        height: 550px;
+        width: 100px;
+        top: 100px;
+        left: 10px;
+    }
+    .sidebar{
+        visibility: hidden;
+    }
+.instagram{
+    transition:all 0.5s;
+    position: absolute;
+    width: 40px;
+    left: 40px;
+    top: 20px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.tiktok{
+    transition:all 0.5s;
+    position: absolute;
+    width: 35px;
+    left: 40px;
+    top: 75px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.youtube{
+    transition:all 0.5s;
+    position: absolute;
+    width: 40px;
+    left: 38px;
+    top: 130px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.merch{
+    transition:all 0.5s;
+    position: absolute;
+    width: 50px;
+    transform: translateX(50%);
+    left: 50%;
+    bottom: 0;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.Merch{
+    transition:all 0.5s;
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    cursor: pointer;
+    font-size:16px;
+    color: aliceblue;
+    text-decoration: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.Mmerch{
+    position: absolute;
+    top: 65%;
+}
+
+.pp{
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    text-align: center;
+    position: relative;
+    font-size: 10px;
+    top: 35%;
+    left: 5px;
+}
+
+.d4{
+    position: absolute;
+    top: 10px;
+    left: 120px;
+    height: 95%;
+    width: 1px;
+    background-color:aliceblue;
+    border-radius: 5px; 
+}
 }
 @media only screen and (max-width:1440px){
     .sidebar{
@@ -270,15 +432,5 @@
         width: 300px;
         top: 5px;
         left: 10px;
-    }
-    .news{
-        transition:all 0.5s;
-        position: absolute;
-        top: 10px;
-        left: 58%;
-        cursor: pointer;
-        font-size:30px;
-        color: aliceblue;
-        text-decoration: none;
     }
 }
