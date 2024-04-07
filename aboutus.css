@@ -369,10 +369,11 @@
             font-size: 30px;
         }
         .Text{
-            position:absolute;
+            position:relative;
             left: 50%;
             transform: translate(-50%);
             width: 90%;
+            top: 20px;
             height: 700px;
             text-align: center;
             font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -384,7 +385,6 @@
         .b{
             position:absolute;
             width: 100%;
-            top: 540px;
             height: 130px;
             background-color:rgb(170, 170, 170);
         }
@@ -535,12 +535,30 @@
             width: 80%;
             position: absolute;
             left: 10%;
-            top: 150px;
+            top: 130px;
         }
         .sighn{
             width: 100px;
             position: absolute;
             top: 12.5%;
+        }
+        .B1{
+            width: 70px;
+            position: absolute;
+            left: 10%;
+            border-radius: 20px;
+        }
+        .B2{
+            width: 70px;
+            position: absolute;
+            left: 30%;
+            border-radius: 20px;
+        }
+        .B3{
+            width: 70px;
+            position: absolute;
+            left: 50%;
+            border-radius: 20px;
         }
     }
     @media only screen and (max-width:1440px){
