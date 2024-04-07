@@ -413,9 +413,9 @@
             top:20px;
             left: 10%;
         }
-        .mobilehome{
+        .home{
             transition:all 0.5s;
-            background-color: rgb(0, 136, 255);
+            background-color: aliceblue;
             width: 100px;
             height: 30px;
             position: absolute;
@@ -425,11 +425,8 @@
             right: 5%;
             font-size:20px;
             cursor:pointer;
-            color: rgb(255, 255, 255);
+            color: black;
             text-decoration: none;
-        }
-        .home{
-            visibility: hidden;
         }
         .market{
             visibility: hidden;

@@ -520,12 +520,12 @@ a{
         text-decoration: none;
     }
     .T1{
-        visibility: collapse;
+        visibility: hidden;
     }
     .mobileT1{
         color: aliceblue;
         position: absolute;
-        font-size: 12px;
+        font-size: 16px;
         text-align: center;
         width: 90%;
         left: 5%;
@@ -540,12 +540,12 @@ a{
     }
     .mobileQ{
         color: aliceblue;
-        position: relative;
-        font-size: 12px;
+        position: absolute;
+        font-size: 14px;
         text-align: center;
         width:90%;
         left: 5%;
-        top: 10px;
+        top: 200px;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background-color:rgb(25, 25, 25);
         border-radius: 10px;
@@ -560,7 +560,7 @@ a{
         color: aliceblue;
         display: flex;
         position: absolute;
-        top: 440px;
+        top: 500px;
         left: 5%;
         width: 90%;
     }
@@ -640,13 +640,13 @@ a{
     }
     .mobileQ3{
         color: aliceblue;
-        position: relative;
+        position: absolute;
         font-size: 30px;
         text-align: center;
-        width: 70%;
-        height: 400px;
+        width: 75%;
+        height: 390px;
         left: 5%;
-        top: -50px;
+        top:700px;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background-color:rgb(25, 25, 25);
         border-radius: 10px;
@@ -657,6 +657,40 @@ a{
         width:300px;
         border-radius: 2pc;
         transition: 0.5s;
+    }
+    .t2{
+        visibility: hidden;
+    }
+    .T2{
+        visibility: hidden;
+    }
+    
+    .IT2{
+        visibility: hidden;
+    }
+    .mobilet2{
+        color: aliceblue;
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        top: 1150px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color:rgb(25, 25, 25);
+        border-radius: 10px;
+        border: solid 10px rgb(25, 25, 25);
+        text-align: center;
+    }
+    .mobiletT2{
+        position: absolute;
+        font-size: 20px;
+    }
+    
+    .mobileIT2{
+        position: absolute;
+        left: 10%;
+        top: 1400px;
+        width: 80%;
+        border-radius: 10px;
     }
 }
 @media only screen and (max-width:1650px){
