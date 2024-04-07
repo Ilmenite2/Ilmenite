@@ -293,7 +293,7 @@
         transition:all 0.5s;
         position: absolute;
         top: 52.5px;
-        right: -5%;
+        right: -10%;
         cursor: pointer;
         font-size:20px;
         color: aliceblue;
@@ -304,7 +304,7 @@
         transition: all 0.5s;
         position: absolute;
         top: 52.5px;
-        left: 50%;
+        left: 55%;
         transform: translateX(-50%);
         cursor: pointer;
         font-size: 20px;
@@ -328,7 +328,7 @@
         height: 25px;
         position: absolute;
         top: 53px;
-        left: 75%;
+        left: 80%;
         background-color: aliceblue;
     }
     .d2{
@@ -336,7 +336,7 @@
         height: 25px;
         position: absolute;
         top: 53px;
-        left: 25%;
+        left: 89px;
         background-color: aliceblue;
     }
     .mobilesidebar{

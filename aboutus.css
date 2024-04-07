@@ -94,6 +94,18 @@
         left: 55%;
         background-color: aliceblue;
     }
+    .mobilemarket{
+        visibility: hidden;
+
+    }
+    .mobilenews{
+        visibility: hidden;
+
+    }
+
+    .mobilegame{
+        visibility: hidden;
+    }
     .Text{
         position:absolute;
         left: 12.5%;
@@ -107,15 +119,39 @@
         box-shadow: 0px 0px 40px;
     }
     .W{
+        visibility: visible;
         font-size:80px;
         font-weight: bold;
     }
     .A{
+        visibility: visible;
         font-size: 30px;
         font-weight: bold;
         width: 80%;
         position: relative;
         left: 10%;
+    }
+    .bigW{
+        visibility: hidden;
+        font-size:1px;
+        font-weight: bold;
+        
+    }
+    .bigA{
+        visibility: hidden;
+        font-size: 1px;
+        font-weight: bold;
+        width: 100%;
+        position: absolute;
+        left: 10%;
+        top: -1000px;
+
+    }
+    .mobileA{
+        visibility: hidden;
+    }
+    .mobileW{
+        visibility: hidden;
     }
     .sighn{
         width: 200px;
@@ -161,24 +197,25 @@
         }
         .GL1{
             width: 100%;
-            height: 10px;
+            height: 5px;
             background-color: goldenrod;
         }
         .T{
             position: absolute;
-            top: 20px;
-            left: 2%;
+            top: 15px;
+            left: 10%;
             width: 75%;
             
         }
         .logo{
-            width: 75px;
+            width: 45px;
         }
         .I{
+            visibility: visible;
             position: absolute;
-            top: 10px;
-            left: 80px;
-            font-size: 40px;
+            top: 5px;
+            left: 50px;
+            font-size: 30px;
         }
         .market{
             position: absolute;
@@ -297,13 +334,202 @@
             background-color:rgb(170, 170, 170);
         }
     }
-
-    @media only screen and (max-width:1440px){
+    @media only screen and (max-width:1200px){
+        .topbar{
+            visibility: visible;
+            width: 100%;
+            height: 100px;
+            background-color: rgb(25, 25, 25);
+            color: aliceblue;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .GL1{
+            visibility: visible;
+            width: 100%;
+            height: 5px;
+            background-color: goldenrod;
+        }
+        .T{
+            visibility: visible;
+            position: absolute;
+            top: 15px;
+            left: 10%;
+            width: 75%;
+            
+        }
+        .logo{
+            visibility: visible;
+            width: 45px;
+        }
+        .I{
+            visibility: visible;
+            position: absolute;
+            top: 5px;
+            left: 50px;
+            font-size: 30px;
+        }
+        .e{
+            position: relative;
+            visibility: visible;
+            color: aliceblue;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 25px;
+            width: 80%;
+            top: 10px;
+            text-align: center;
+            left: 10%;
+        }
+        .e1{
+            position: relative;
+            visibility: visible;
+            color: goldenrod;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 25px;
+            width: 80%;
+            text-align: center;
+            font-weight: bold;
+            top:20px;
+            left: 10%;
+        }
+        .home{
+            transition:all 0.5s;
+            background-color: aliceblue;
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            text-align: center;
+            top: 25px;
+            border-radius: 25px;
+            right: 5%;
+            font-size:20px;
+            cursor:pointer;
+            color: black;
+            text-decoration: none;
+        }
+        .market{
+            visibility: hidden;
+            position: absolute;
+            left: 0%;
+        }
+        .news{
+            visibility: hidden;
+        }
+    
+        .game{
+            visibility: hidden;
+        }
+        .mobilemarket{
+            visibility: visible;
+            transition:all 0.5s;
+            position: absolute;
+            top: 52.5px;
+            right: -10%;
+            cursor: pointer;
+            font-size:20px;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .mobilenews{
+            visibility: visible;
+            transition: all 0.5s;
+            position: absolute;
+            top: 52.5px;
+            left: 55%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            color: aliceblue;
+            text-decoration: none;
+        }
+    
+        .mobilegame{
+            visibility: visible;
+            transition:all 0.5s;
+            position: absolute;
+            top: 52.5px;
+            left: -5%;
+            cursor: pointer;
+            font-size:20px;
+            color: aliceblue;
+            text-decoration: none;
+        }
+        .d1{
+            width: 0.5px;
+            height: 25px;
+            position: absolute;
+            top: 53px;
+            left: 80%;
+            background-color: aliceblue;
+        }
+        .d2{
+            width: 0.5px;
+            height: 25px;
+            position: absolute;
+            top: 53px;
+            left: 89px;
+            background-color: aliceblue;
+        }
         .W{
-            font-size:70px;
+            visibility: hidden;
+            font-size:1px;
             font-weight: bold;
         }
         .A{
+            visibility: hidden;
+            font-size: 2px;
+            font-weight: bold;
+            width: 80%;
+            position: absolute;
+            left: 10%;
+        }
+        .bigW{
+            visibility: hidden;
+            font-size:1px;
+            font-weight: bold;
+            
+        }
+        .bigA{
+            visibility: hidden;
+            font-size: 1px;
+            font-weight: bold;
+            width: 100%;
+            position: absolute;
+            left: 10%;
+            top: -900px;
+
+        }
+        .mobileW{
+            visibility: visible;
+            font-size:30px;
+            font-weight: bold;
+            position: absolute;
+            transform: translate(-50%);
+            left: 50%;
+            top: 30px;
+            width: 100%;
+        }
+        .mobileA{
+            visibility: visible;
+            font-size: 16px;
+            font-weight: bold;
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            top: 150px;
+        }
+        .sighn{
+            width: 100px;
+            position: absolute;
+            top: 12.5%;
+        }
+    }
+    @media only screen and (max-width:1440px){
+        .bigW{
+            font-size:70px;
+            font-weight: bold;
+            
+        }
+        .bigA{
             font-size: 28px;
             font-weight: bold;
             width: 80%;
