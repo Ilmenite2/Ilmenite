@@ -446,3 +446,78 @@ if (tryButton) {
         });
     }
 }
+// --- 3D Technical Merchandise Viewer ---
+
+/**
+ * Updates the main product image and atmospheric background
+ */
+function updateProductColor(color, imgSrc) {
+    const mainImg = document.getElementById('main-product-img');
+    const container = document.querySelector('.merchandise-container');
+    const swatches = document.querySelectorAll('.swatch');
+
+    if (!mainImg || !container) return;
+
+    // Update Image with fade effect
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+        mainImg.src = imgSrc;
+        mainImg.style.opacity = '1';
+    }, 300);
+
+    // Update Background Atmosphere
+    container.className = 'merchandise-container section section-alt ' + `bg-${color}`;
+
+    // Update active swatch
+    swatches.forEach(s => s.classList.remove('active'));
+    const activeSwatch = Array.from(swatches).find(s => s.title.toLowerCase().includes(color));
+    if (activeSwatch) activeSwatch.classList.add('active');
+}
+
+/**
+ * Initializes the 3D Tilt and Lighting effect
+ */
+function init3DViewer() {
+    const card = document.querySelector('.merch-feature-image');
+    if (!card) return;
+
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Calculate rotation (center is 0,0)
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        // Apply 3D Rotation
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+        // Update Lighting (Shine overlay)
+        const shine = card.style.setProperty('--shine-x', `${x}px`);
+        const shineY = card.style.setProperty('--shine-y', `${y}px`);
+        
+        // Dynamic lighting update via CSS custom properties
+        card.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.15) 0%, transparent 80%)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        // Reset to neutral position
+        card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        card.style.transition = 'transform 0.5s ease';
+        card.style.backgroundImage = '';
+        setTimeout(() => {
+            card.style.transition = 'transform 0.1s ease-out';
+        }, 500);
+    });
+}
+
+// Initialize on load
+window.addEventListener('load', () => {
+    init3DViewer();
+    // Default to Obsidian background
+    const container = document.querySelector('.merchandise-container');
+    if (container) container.classList.add('bg-obsidian');
+});

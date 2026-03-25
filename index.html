@@ -131,51 +131,46 @@
     </section>
 
     <!-- Merchandise Section -->
-    <section id="merchandise" class="section section-alt">
+    <section id="merchandise" class="section section-alt merchandise-container">
         <div class="container">
             <div class="section-header">
                 <h2>Curated Luxury Collection</h2>
                 <p>Exclusive merchandise that reflects our commitment to quality and elegance</p>
             </div>
-            <div class="merch-grid">
-                <div class="merch-item">
-                    <div class="merch-image">
-                        <img src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0884bd.png" alt="'Obsidian' Polo">
-                    </div>
-                    <div class="merch-details">
-                        <h3>'Obsidian' Executive Polo</h3>
-                        <p>190g/m² Premium Pique. Stealth Embroidery.</p>
-                        <span class="price">$89</span>
-                    </div>
+            <div class="merch-feature">
+                <div class="merch-feature-image">
+                    <img id="main-product-img" src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0884bd.png" alt="Executive Polo Series 01">
                 </div>
-                <div class="merch-item">
-                    <div class="merch-image">
-                        <img src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e093109.png" alt="'Sovereign' Polo">
+                <div class="merch-feature-details">
+                    <div class="merch-badge">Launch: May 2026</div>
+                    <h3>Executive Polo: Series 01</h3>
+                    <p class="merch-price">$89.00</p>
+                    <p class="merch-description">
+                        The definitive technical garment for the modern founder. Crafted from 190g/m² premium pique cotton with silk-stitched wide-track 'I L M E N I T E' embroidery.
+                    </p>
+                    
+                    <div class="merch-option-group">
+                        <label>Select Foundation Color</label>
+                        <div class="color-swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;" onclick="updateProductColor('black', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0884bd.png')" title="Obsidian Black"></div>
+                            <div class="swatch" style="background-color: #d2b48c;" onclick="updateProductColor('sand', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e093109.png')" title="Sovereign Sand"></div>
+                            <div class="swatch" style="background-color: #808080;" onclick="updateProductColor('grey', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e08d2ab.png')" title="Technical Grey"></div>
+                            <div class="swatch" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="updateProductColor('white', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e099001.png')" title="Foundation White"></div>
+                        </div>
                     </div>
-                    <div class="merch-details">
-                        <h3>'Sovereign' Neutral Polo</h3>
-                        <p>Foundation beige with deep black branding.</p>
-                        <span class="price">$89</span>
+
+                    <div class="merch-option-group">
+                        <label>Select Size</label>
+                        <select class="size-select">
+                            <option>SMALL</option>
+                            <option>MEDIUM</option>
+                            <option>LARGE</option>
+                            <option>X-LARGE</option>
+                        </select>
                     </div>
-                </div>
-                <div class="merch-item">
-                    <div class="merch-image">
-                        <img src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e08d2ab.png" alt="'Origin' Polo">
-                    </div>
-                    <div class="merch-details">
-                        <h3>'Origin' Technical Grey</h3>
-                        <p>Subtle black branding with foundation coordinates.</p>
-                        <span class="price">$89</span>
-                    </div>
-                </div>
-                <div class="merch-item">
-                    <div class="merch-image">
-                        <img src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e099001.png" alt="'Foundation' Polo">
-                    </div>
-                    <div class="merch-details">
-                        <h3>'Foundation' White Polo</h3>
-                        <p>The classic executive staple. Crisp and sharp.</p>
-                        <span class="price">$89</span>
+
+                    <div class="section-cta" style="margin-top: 2rem;">
+                        <a href="#contact" class="btn btn-primary">Join the Exclusive Waitlist</a>
                     </div>
                 </div>
             </div>

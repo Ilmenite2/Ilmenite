@@ -606,18 +606,144 @@ p {
     margin-bottom: 0.5rem;
 }
 
-.merch-details p {
-    color: var(--off-white);
-    margin-bottom: 1rem;
+/* Merchandise Section - Technical 3D Viewer */
+.merchandise-container {
+    padding: 100px 0;
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
+.bg-obsidian { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+.bg-sand { background: linear-gradient(135deg, #2a2620 0%, #3e3830 100%); }
+.bg-grey { background: linear-gradient(135deg, #1c1c1c 0%, #333333 100%); }
+.bg-white { background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 100%); }
+
+.merch-feature {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    perspective: 1000px; /* Enable 3D perspective */
+}
+
+.merch-feature-image {
+    flex: 1;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    cursor: crosshair;
+}
+
+.merch-feature-image img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+    transform: translateZ(50px); /* Lift image off the 'surface' */
+}
+
+/* Dynamic Lighting Shine Effect */
+.merch-feature-image::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+}
+
+.merch-feature-details {
+    flex: 1;
+}
+
+.merch-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--gold);
+    color: var(--primary-black);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.merch-price {
+    font-size: 2.5rem;
     color: var(--khaki);
+    margin: 10px 0 20px;
+    font-weight: 300;
 }
 
+.merch-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 30px;
+}
+
+.merch-option-group {
+    margin-bottom: 25px;
+}
+
+.merch-option-group label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--khaki);
+    margin-bottom: 15px;
+}
+
+.color-swatches {
+    display: flex;
+    gap: 15px;
+}
+
+.swatch {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.swatch.active {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px var(--gold);
+}
+
+.size-select {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 10px 20px;
+    width: 200px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+}
+
+.size-select:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+@media (max-width: 992px) {
+    .merch-feature {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
 .section-cta {
     text-align: center;
 }
