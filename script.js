@@ -346,14 +346,19 @@ const initVapi = async () => {
         vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
         console.log('Vapi initialized successfully');
             
-            vapiInstance.on('call-start', () => {
-                console.log('Call has started');
-                if (overlay) {
-                    overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    if (typeof initVisualizer === 'function') initVisualizer();
-                }
-            });
+        vapiInstance.on('call-start', () => {
+            console.log('Call has started');
+            if (tryButton) {
+                tryButton.innerHTML = 'Try It';
+                tryButton.disabled = false;
+                tryButton.style.cursor = 'pointer';
+            }
+            if (overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (typeof initVisualizer === 'function') initVisualizer();
+            }
+        });
 
             vapiInstance.on('volume-level', (volume) => {
                 if (sphereVisualizer) sphereVisualizer.updateVolume(volume);
@@ -361,6 +366,11 @@ const initVapi = async () => {
 
             vapiInstance.on('call-end', () => {
                 console.log('Call has ended');
+                if (tryButton) {
+                    tryButton.innerHTML = 'Try It';
+                    tryButton.disabled = false;
+                    tryButton.style.cursor = 'pointer';
+                }
                 if (overlay) {
                     overlay.classList.remove('active');
                     document.body.style.overflow = '';
@@ -369,6 +379,12 @@ const initVapi = async () => {
 
             vapiInstance.on('error', (e) => {
                 console.error('Vapi Error Detail:', e);
+                
+                if (tryButton) {
+                    tryButton.innerHTML = 'Try It';
+                    tryButton.disabled = false;
+                    tryButton.style.cursor = 'pointer';
+                }
                 
                 let errorMsg = 'An unexpected error occurred.';
                 if (typeof e === 'string') errorMsg = e;
@@ -415,6 +431,9 @@ if (tryButton) {
         }
         
         if (vapiInstance) {
+            tryButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
+            tryButton.disabled = true;
+            tryButton.style.cursor = 'wait';
             vapiInstance.start(VAPI_ASSISTANT_ID);
         } else {
             alert('Vapi SDK failed to load. Please refresh and try again or use a local server.');
