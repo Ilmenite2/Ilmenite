@@ -19,7 +19,7 @@
     <meta name="twitter:image" content="images/quasar_thumb.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap"
         rel="stylesheet">
@@ -33,7 +33,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
-<body>
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="100">
+    <!-- In-App Browser & Security Warning -->
+    <div id="browser-alert" class="browser-alert">
+        FOR THE FULL EXECUTIVE EXPERIENCE (AUDIO & HAPTICS): OPEN ON LOCALHOST OR HTTPS.
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -43,9 +48,9 @@
             </div>
             <ul id="primary-nav" class="nav-menu">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#works">Our Works</a></li>
-                <li><a href="#merchandise">Merchandise</a></li>
-                <li><a href="#support">Partnership</a></li>
+                <li><a href="#works">Solutions</a></li>
+                <li><a href="#merchandise">Collection</a></li>
+                <li><a href="#pulse">Pulse</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -58,28 +63,29 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero reveal-on-scroll">
         <canvas id="hero-canvas"></canvas>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">ILMENITE</h1>
-                <p class="hero-subtitle">Where Legacy Meets Innovation</p>
-                <p class="hero-description">Crafting exceptional software solutions, curating luxury merchandise, and
-                    guiding your investment journey with the sophistication of old money tradition.</p>
-                <div class="hero-buttons">
-                    <a href="#works" class="btn btn-primary">View Our Works</a>
-                    <a href="#support" class="btn btn-secondary">Support Us</a>
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">ILMENITE</h1>
+                    <p class="hero-subtitle">Where Legacy Meets Innovation</p>
+                    <p class="hero-description">Crafting exceptional software solutions, curating luxury merchandise, and guiding your investment journey with the sophistication of old money tradition.</p>
+                    <div class="hero-buttons">
+                        <button id="vapi-start-button" class="btn btn-primary">Speak with Atsh</button>
+                        <a href="#works" class="btn btn-outline">Explore Solutions</a>
+                    </div>
                 </div>
             </div>
-
         </div>
         <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+            <span></span>
         </div>
     </section>
 
     <!-- Works Section -->
-    <section id="works" class="section">
+    <section id="works" class="section reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>Exceptional Digital Solutions</h2>
@@ -131,31 +137,31 @@
     </section>
 
     <!-- Merchandise Section -->
-    <section id="merchandise" class="section section-alt merchandise-container">
+    <section id="merchandise" class="section section-alt">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll">
                 <h2>Curated Luxury Collection</h2>
                 <p>Exclusive merchandise that reflects our commitment to quality and elegance</p>
             </div>
-            <div class="merch-feature">
-                <div class="merch-feature-image">
-                    <img id="main-product-img" src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0884bd.png" alt="Executive Polo Series 01">
+            <div id="merch-empire-grid" class="reveal-on-scroll">
+                <div id="merch-empire-visual">
+                    <img id="main-product-img" src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png" alt="Executive Polo Series 01">
                 </div>
-                <div class="merch-feature-details">
-                    <div class="merch-badge">Launch: May 2026</div>
+                <div class="merch-empire-details">
+                    <div class="merch-empire-badge">Launch: May 2026</div>
                     <h3>Executive Polo: Series 01</h3>
-                    <p class="merch-price">$89.00</p>
-                    <p class="merch-description">
+                    <p class="merch-empire-price">$89.00</p>
+                    <p class="merch-empire-description">
                         The definitive technical garment for the modern founder. Crafted from 190g/m² premium pique cotton with silk-stitched wide-track 'I L M E N I T E' embroidery.
                     </p>
                     
                     <div class="merch-option-group">
                         <label>Select Foundation Color</label>
-                        <div class="color-swatches">
-                            <div class="swatch active" style="background-color: #1a1a1a;" onclick="updateProductColor('black', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0884bd.png')" title="Obsidian Black"></div>
-                            <div class="swatch" style="background-color: #d2b48c;" onclick="updateProductColor('sand', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e093109.png')" title="Sovereign Sand"></div>
-                            <div class="swatch" style="background-color: #808080;" onclick="updateProductColor('grey', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e08d2ab.png')" title="Technical Grey"></div>
-                            <div class="swatch" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="updateProductColor('white', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e099001.png')" title="Foundation White"></div>
+                        <div class="merch-empire-swatches">
+                            <div class="merch-empire-swatch active" style="background-color: #1a1a1a;" onclick="updateProductColor('black', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png')" title="Obsidian Black"></div>
+                            <div class="merch-empire-swatch" style="background-color: #d2b48c;" onclick="updateProductColor('sand', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png')" title="Sovereign Sand"></div>
+                            <div class="merch-empire-swatch" style="background-color: #808080;" onclick="updateProductColor('grey', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e088c52.png')" title="Technical Grey"></div>
+                            <div class="merch-empire-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="updateProductColor('white', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e094156.png')" title="Foundation White"></div>
                         </div>
                     </div>
 
@@ -169,33 +175,36 @@
                         </select>
                     </div>
 
-                    <div class="section-cta" style="margin-top: 2rem;">
+                    <div class="section-cta" style="margin-top: 2rem; text-align: left;">
                         <a href="#contact" class="btn btn-primary">Join the Exclusive Waitlist</a>
                     </div>
                 </div>
             </div>
-            <div class="section-cta">
-                <a href="#" class="btn btn-primary">View Collection</a>
+            <div class="section-cta" style="margin-top: 2rem;">
             </div>
         </div>
     </section>
 
-    <!-- Support Section -->
-    <section id="support" class="section">
+    <!-- Company Pulse Section -->
+    <section id="pulse" class="section reveal-on-scroll">
         <div class="container">
             <div class="investment-content">
                 <div class="investment-text">
-                    <h2>Fuel The Architecture</h2>
-                    <p class="investment-subtitle">Attaché Network & Project Quasar (In Development)</p>
-                    <p>While the Attaché AI is currently live and deploying, our flagship predictive wealth terminal—<strong>Project Quasar</strong>—is under heavy development. Becoming an early backer directly funds its completion and secures your place on the priority waitlist.</p>
+                    <div class="merch-empire-badge">Q1 2026 UPDATE</div>
+                    <h2>The Executive Pulse</h2>
+                    <p class="investment-subtitle">Log 01: Series 01 Deployment</p>
+                    <p>
+                        Ilmenite transitions into the physical realm. We have successfully finalized the <strong>Series 01 Executive Polo</strong>—a foundational garment for the modern founder. Our focus now shifts to the completion of <strong>Project Quasar</strong>, our proprietary predictive wealth infrastructure.
+                    </p>
 
-                    <div class="donation-container">
-                        <div class="qr-block">
-                            <img src="images/gofundme_qr.png" alt="Back the Infrastructure" class="qr-code">
+                    <div class="event-feed">
+                        <div class="event-item">
+                            <span class="event-date">MARCH 25</span>
+                            <p>Series 01 Production Prototypes Validated.</p>
                         </div>
-                        <div class="donation-actions">
-                            <a href="https://gofund.me/15fb14a04" target="_blank" class="btn btn-primary">Become a Backer</a>
-                            <p class="donation-note">Accelerate the timeline. Secure the future.</p>
+                        <div class="event-item">
+                            <span class="event-date">MAY 2026</span>
+                            <p>Global Launch & Membership Portal Activation.</p>
                         </div>
                     </div>
                 </div>

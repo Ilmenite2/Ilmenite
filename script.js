@@ -135,27 +135,7 @@ if (contactForm) {
     });
 }
 
-// Hexagon glow effect on mouse move
-const largeHexagon = document.querySelector('.large-hexagon');
-if (largeHexagon) {
-    largeHexagon.addEventListener('mousemove', (e) => {
-        const rect = largeHexagon.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const glow = largeHexagon.querySelector('.hexagon-glow');
-        if (glow) {
-            glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(212, 175, 55, 0.4) 0%, transparent 70%)`;
-        }
-    });
-
-    largeHexagon.addEventListener('mouseleave', () => {
-        const glow = largeHexagon.querySelector('.hexagon-glow');
-        if (glow) {
-            glow.style.background = 'radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%)';
-        }
-    });
-}
+// Hexagon glow effect removed (replaced by 2D canvas engine)
 
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
@@ -322,7 +302,7 @@ const VAPI_PUBLIC_KEY = '6048d665-b4a4-48a2-ac93-d56e01703987';
 const VAPI_ASSISTANT_ID = 'a7842df6-67b3-4978-bdd5-705daff1ffba';
 
 let vapiInstance = null;
-const tryButton = document.getElementById('vapi-try-button');
+const vapiButton = document.getElementById('vapi-start-button'); // Fixed ID
 const endButton = document.getElementById('vapi-end-button');
 const overlay = document.getElementById('vapi-overlay');
 
@@ -348,176 +328,281 @@ const initVapi = async () => {
             
         vapiInstance.on('call-start', () => {
             console.log('Call has started');
-            if (tryButton) {
-                tryButton.innerHTML = 'Try It';
-                tryButton.disabled = false;
-                tryButton.style.cursor = 'pointer';
+            haptic([100, 50, 100]); // Start buzz
+            if (vapiButton) {
+                vapiButton.innerHTML = 'Speak with Atsh';
+                vapiButton.disabled = false;
             }
             if (overlay) {
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                if (typeof initVisualizer === 'function') initVisualizer();
             }
         });
 
-            vapiInstance.on('volume-level', (volume) => {
-                if (sphereVisualizer) sphereVisualizer.updateVolume(volume);
-            });
+        vapiInstance.on('call-end', () => {
+            if (vapiButton) vapiButton.innerHTML = 'Speak with Atsh';
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
-            vapiInstance.on('call-end', () => {
-                console.log('Call has ended');
-                if (tryButton) {
-                    tryButton.innerHTML = 'Try It';
-                    tryButton.disabled = false;
-                    tryButton.style.cursor = 'pointer';
-                }
-                if (overlay) {
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            vapiInstance.on('error', (e) => {
-                console.error('Vapi Error Detail:', e);
-                
-                if (tryButton) {
-                    tryButton.innerHTML = 'Try It';
-                    tryButton.disabled = false;
-                    tryButton.style.cursor = 'pointer';
-                }
-                
-                let errorMsg = 'An unexpected error occurred.';
-                if (typeof e === 'string') errorMsg = e;
-                else if (e.message) errorMsg = e.message;
-                else if (e.error && e.error.msg) errorMsg = e.error.msg;
-
-                if (window.location.protocol === 'file:') {
-                    alert('CRITICAL: Vapi cannot connect via "file://". You MUST use a local server (http://localhost:8080) or upload to Netlify/Vercel.');
-                } else if (errorMsg.includes('ejected') || errorMsg.includes('ended')) {
-                    alert('Call Ended: The session was disconnected. This usually happens if the Mic is blocked or the Vapi keys are invalid.');
-                } else {
-                    alert(`Vapi Error: ${errorMsg}`);
-                }
-
-                if (overlay) {
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+        vapiInstance.on('error', (e) => {
+            console.error('Vapi Error:', e);
+            if (vapiButton) vapiButton.innerHTML = 'Speak with Atsh';
+            
+            let msg = "VAPI ERROR: CONNECTION RESTRICTED.";
+            if (window.location.protocol === 'file:') {
+                msg = "SECURITY: OPEN ON LOCALHOST OR HTTPS FOR VOICE AI.";
+            } else if (e.message && e.message.includes('mic')) {
+                msg = "PERMISSION: MICROPHONE ACCESS BLOCKED.";
+            }
+            showAlert(msg);
+        });
     } catch (err) {
         console.error('Error creating Vapi instance:', err);
     }
 };
 
-// Start initialization check
-if (tryButton) {
-    // Attempt init after a short delay to ensure script loading
-    setTimeout(initVapi, 1000);
-
-    tryButton.addEventListener('click', async () => {
-        // Enforce protocol check
-        if (window.location.protocol === 'file:') {
-            alert('SECURITY ERROR: Vapi Voice AI requires a secure connection (HTTPS or Localhost). \n\nPlease run "python3 -m http.server 8080" and visit http://localhost:8080');
-            return;
-        }
-
-        if (!vapiInstance) {
-            const originalText = tryButton.textContent;
-            tryButton.textContent = "Loading...";
-            tryButton.disabled = true;
-            await initVapi();
-            tryButton.textContent = originalText;
-            tryButton.disabled = false;
-        }
-        
+if (vapiButton) {
+    setTimeout(initVapi, 500);
+    vapiButton.addEventListener('click', async () => {
+        if (!vapiInstance) await initVapi();
         if (vapiInstance) {
-            tryButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
-            tryButton.disabled = true;
-            tryButton.style.cursor = 'wait';
+            vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
+            // Syncopated Haptic Pattern for Connecting
+            haptic([20, 20, 20, 50, 20, 50, 20, 50]);
             vapiInstance.start(VAPI_ASSISTANT_ID);
-        } else {
-            alert('Vapi SDK failed to load. Please refresh and try again or use a local server.');
         }
     });
-
-    if (endButton) {
-        endButton.addEventListener('click', () => {
-            if (vapiInstance) vapiInstance.stop();
-        });
-    }
 }
-// --- 3D Technical Merchandise Viewer ---
 
 /**
- * Updates the main product image and atmospheric background
+ * --- KINETIC MERCHANDISE INTERFACE ---
  */
 function updateProductColor(color, imgSrc) {
     const mainImg = document.getElementById('main-product-img');
-    const container = document.querySelector('.merchandise-container');
-    const swatches = document.querySelectorAll('.swatch');
+    const swatches = document.querySelectorAll('.merch-empire-swatch');
 
-    if (!mainImg || !container) return;
+    if (!mainImg) return;
 
-    // Update Image with fade effect
-    mainImg.style.opacity = '0';
+    // Cinematic Transition: Shrink and Blur
+    mainImg.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    mainImg.style.opacity = '0.3';
+    mainImg.style.filter = 'blur(10px) drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
+    mainImg.style.transform = 'scale(0.9)';
+    
     setTimeout(() => {
         mainImg.src = imgSrc;
         mainImg.style.opacity = '1';
-    }, 300);
-
-    // Update Background Atmosphere
-    container.className = 'merchandise-container section section-alt ' + `bg-${color}`;
+        mainImg.style.filter = 'blur(0px) drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
+        mainImg.style.transform = 'scale(1)';
+    }, 400);
 
     // Update active swatch
     swatches.forEach(s => s.classList.remove('active'));
     const activeSwatch = Array.from(swatches).find(s => s.title.toLowerCase().includes(color));
     if (activeSwatch) activeSwatch.classList.add('active');
+    
+    // Haptic Feedback for swatch change
+    haptic([50, 50, 50, 50]);
+}
+
+function initKineticDrift() {
+    const container = document.getElementById('merch-empire-visual');
+    const img = document.getElementById('main-product-img');
+    
+    if (!container || !img) return;
+
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        img.style.transform = `translate(${x * -20}px, ${y * -20}px)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        img.style.transform = 'translate(0, 0)';
+    });
+}
+
+
+/**
+ * --- HEXAGON PATTERN ENGINE ---
+ */
+function initHeroCanvas() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    
+    // Fluid Lag Mouse: target vs current
+    let targetX = -2000, targetY = -2000;
+    let currentX = -2000, currentY = -2000;
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    const hero = canvas.closest('.hero');
+    if (hero) {
+        hero.addEventListener('mousemove', e => { 
+            targetX = e.clientX; 
+            targetY = e.clientY; 
+        });
+        hero.addEventListener('mouseleave', () => { 
+            targetX = -2000; 
+            targetY = -2000; 
+        });
+    }
+
+    window.addEventListener('resize', resize);
+
+    const hexRadius = 40;
+    const hexWidth = hexRadius * Math.sqrt(3);
+    const hexHeight = hexRadius * 2;
+
+    function drawHex(x, y, opacity) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - (Math.PI / 6);
+            ctx.lineTo(x + hexRadius * Math.cos(angle), y + hexRadius * Math.sin(angle));
+        }
+        ctx.closePath();
+        ctx.strokeStyle = `rgba(139, 115, 85, ${opacity})`;
+        ctx.stroke();
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Fluid Mouse Lerp (0.05 factor for elite lag)
+        currentX += (targetX - currentX) * 0.05;
+        currentY += (targetY - currentY) * 0.05;
+
+        // Scroll Fade: Canvas disappears as we move down
+        const scrollY = window.pageYOffset;
+        const scrollAlpha = Math.max(0, 1 - scrollY / 600);
+        canvas.style.opacity = scrollAlpha;
+
+        const time = Date.now() * 0.001;
+        const colCount = Math.ceil(width / hexWidth) + 1;
+        const rowCount = Math.ceil(height / (hexHeight * 0.75)) + 1;
+
+        for (let r = 0; r < rowCount; r++) {
+            for (let c = 0; c < colCount; c++) {
+                let x = c * hexWidth + (r % 2 !== 0 ? hexWidth/2 : 0);
+                let y = r * hexHeight * 0.75;
+                
+                // Mouse proximity - with lerped coordinates
+                const dist = Math.sqrt((x - currentX)**2 + (y - currentY)**2);
+                let opacity = Math.max(0.04, 0.08 + (1 - dist/450) * 0.5);
+                
+                // Enhanced Ocean Waves
+                const wave1 = Math.sin(x * 0.004 + y * 0.002 + time * 1.5) * 0.12;
+                const wave2 = Math.cos(x * 0.002 - y * 0.005 + time * 1.0) * 0.1;
+                opacity += wave1 + wave2;
+                
+                drawHex(x, y, Math.max(0, opacity * scrollAlpha));
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    resize(); animate();
 }
 
 /**
- * Initializes the 3D Tilt and Lighting effect
+ * --- EXECUTIVE HAPTIC ENGINE ---
  */
-function init3DViewer() {
-    const card = document.querySelector('.merch-feature-image');
-    if (!card) return;
+function haptic(pattern) {
+    if (navigator.vibrate) navigator.vibrate(pattern);
+}
 
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Calculate rotation (center is 0,0)
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-
-        // Apply 3D Rotation
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-        // Update Lighting (Shine overlay)
-        const shine = card.style.setProperty('--shine-x', `${x}px`);
-        const shineY = card.style.setProperty('--shine-y', `${y}px`);
-        
-        // Dynamic lighting update via CSS custom properties
-        card.style.backgroundImage = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.15) 0%, transparent 80%)`;
+function initExecutiveInteractions() {
+    // Order / Partnership (BIIZZzzzzzwww)
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (btn.id !== 'vapi-start-button') {
+            btn.addEventListener('click', () => haptic([500, 100, 500]));
+        }
     });
-
-    card.addEventListener('mouseleave', () => {
-        // Reset to neutral position
-        card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-        card.style.transition = 'transform 0.5s ease';
-        card.style.backgroundImage = '';
-        setTimeout(() => {
-            card.style.transition = 'transform 0.1s ease-out';
-        }, 500);
+    // Swatches (Tactile BZ BIZ)
+    document.querySelectorAll('.merch-empire-swatch').forEach(btn => {
+        btn.addEventListener('click', () => haptic([50, 50, 50, 50]));
+    });
+    // Secondary Actions (Drop)
+    document.querySelectorAll('select, .btn-outline').forEach(el => {
+        el.addEventListener('click', () => haptic([100]));
     });
 }
 
-// Initialize on load
+// Global Activation
+// Global Activation (Final Unified)
 window.addEventListener('load', () => {
-    init3DViewer();
-    // Default to Obsidian background
-    const container = document.querySelector('.merchandise-container');
-    if (container) container.classList.add('bg-obsidian');
+    initHeroCanvas();
+    initKineticDrift();
+    initExecutiveInteractions();
+    initIntersectionObserver();
+    detectInAppBrowser();
+    initSmoothScroll();
 });
+
+/**
+ * Cinematic Reveal Tracking
+ */
+function initIntersectionObserver() {
+    const options = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, options);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+}
+
+/**
+ * Detect In-App Browsers (Instagram, Facebook) to warn about audio issues
+ */
+function detectInAppBrowser() {
+    // Analytics only - no longer showing ugly banner on load
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return (ua.indexOf('Instagram') > -1) || (ua.indexOf('FBAN') > -1);
+}
+
+/**
+ * Show a premium executive toast message
+ */
+function showAlert(msg) {
+    const alert = document.getElementById('browser-alert');
+    if (!alert) return;
+    
+    alert.textContent = msg;
+    alert.classList.add('active');
+    
+    setTimeout(() => {
+        alert.classList.remove('active');
+    }, 6000);
+}
+
+/**
+ * Smooth Scroll for all anchors
+ */
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+}
+
+
