@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilmenite</title>
+    <meta name="description"
+        content="Ilmenite crafts premium Roblox games, luxury merchandise, and beginner-friendly investment guidance with an old-money aesthetic.">
+    <meta property="og:title" content="Ilmenite">
+    <meta property="og:description"
+        content="Crafting premium games, luxury merchandise, and investment guidance with timeless sophistication.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/quasar_thumb.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ilmenite">
+    <meta name="twitter:description"
+        content="Crafting premium games, luxury merchandise, and investment guidance with timeless sophistication.">
+    <meta name="twitter:image" content="images/quasar_thumb.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="images/logo.ico" type="image/x-icon">
+    <!-- Vapi SDK (ESM Module Loading) -->
+    <script type="module">
+      import Vapi from "https://esm.sh/@vapi-ai/web";
+      window.Vapi = Vapi;
+    </script>
+    <!-- Three.js for 3D Visualizer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/ilmenite_logo.png" alt="Ilmenite" class="logo-icon">
+                <span class="logo-text">ILMENITE</span>
+            </div>
+            <ul id="primary-nav" class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#works">Our Works</a></li>
+                <li><a href="#merchandise">Merchandise</a></li>
+                <li><a href="#support">Donation</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">ILMENITE</h1>
+                <p class="hero-subtitle">Where Legacy Meets Innovation</p>
+                <p class="hero-description">Crafting exceptional software solutions, curating luxury merchandise, and
+                    guiding your investment journey with the sophistication of old money tradition.</p>
+                <div class="hero-buttons">
+                    <a href="#works" class="btn btn-primary">View Our Works</a>
+                    <a href="#support" class="btn btn-secondary">Support Us</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Exceptional Digital Solutions</h2>
+                <p>Artfully engineered software defined by precision, depth, and lasting value.</p>
+            </div>
+            <div class="works-grid">
+                <div class="work-card">
+                    <div class="work-image">
+                        <span class="status-badge">Live Now</span>
+                        <img src="images/attache_thumb.png" alt="Attache AI" loading="lazy" decoding="async">
+                    </div>
+                    <div class="work-info">
+                        <h3>Attache</h3>
+                        <p>Your digital sovereign representative. A sophisticated AI telephony system that manages
+                            inquiries and bookings with the discretion and precision of a private attache.</p>
+                        <ul class="work-tags">
+                            <li>Telephony Intelligence</li>
+                            <li>Concierge AI</li>
+                            <li>Bespoke Service</li>
+                        </ul>
+                        <div class="card-buttons" style="display: flex; gap: 10px; margin-top: 1.5rem;">
+                            <a href="#contact" class="btn btn-primary"
+                                style="padding: 10px 20px; font-size: 0.9rem;">Order Now</a>
+                            <a href="javascript:void(0)" id="vapi-try-button" class="btn btn-outline"
+                                style="padding: 10px 20px; font-size: 0.9rem;">Try It</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-image">
+                        <span class="status-badge">In Development</span>
+                        <img src="images/quasar_thumb.png" alt="Quasar System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="work-info">
+                        <h3>Quasar</h3>
+                        <p>See what others miss. A proprietary intelligence system that distills complex market chaos
+                            into absolute clarity, making sophisticated wealth creation effortless.</p>
+                        <ul class="work-tags">
+                            <li>Predictive Intelligence</li>
+                            <li>Deep Learning</li>
+                            <li>Wealth Engineering</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline disabled">Coming Soon</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Merchandise Section -->
+    <section id="merchandise" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Curated Luxury Collection</h2>
+                <p>Exclusive merchandise that reflects our commitment to quality and elegance</p>
+            </div>
+            <div class="merch-grid">
+                <div class="merch-item">
+                    <div class="merch-image">
+                        <div class="merch-placeholder">Premium Apparel</div>
+                    </div>
+                    <div class="merch-details">
+                        <h3>Heritage Collection</h3>
+                        <p>Timeless pieces crafted with the finest materials</p>
+                        <span class="price">From $89</span>
+                    </div>
+                </div>
+                <div class="merch-item">
+                    <div class="merch-image">
+                        <div class="merch-placeholder">Luxury Accessories</div>
+                    </div>
+                    <div class="merch-details">
+                        <h3>Golden Accessories</h3>
+                        <p>Sophisticated accessories for the discerning individual</p>
+                        <span class="price">From $149</span>
+                    </div>
+                </div>
+                <div class="merch-item">
+                    <div class="merch-image">
+                        <div class="merch-placeholder">Collector's Items</div>
+                    </div>
+                    <div class="merch-details">
+                        <h3>Collector's Edition</h3>
+                        <p>Limited edition pieces for true connoisseurs</p>
+                        <span class="price">From $299</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="#" class="btn btn-primary">View Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="section">
+        <div class="container">
+            <div class="investment-content">
+                <div class="investment-text">
+                    <h2>Support the Vision</h2>
+                    <p class="investment-subtitle">Quasar: The Sovereign Financial Terminal</p>
+                    <p>We are building the future of autonomous wealth generation. Your contribution directly funds the
+                        development of our proprietary AI architecture.</p>
+
+                    <div class="donation-container">
+                        <div class="qr-block">
+                            <img src="images/gofundme_qr.png" alt="Donate via GoFundMe" class="qr-code">
+                        </div>
+                        <div class="donation-actions">
+                            <a href="https://gofund.me/15fb14a04" target="_blank" class="btn btn-primary">Donate
+                                Discretely</a>
+                            <p class="donation-note">Your support accelerates our timeline.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="investment-visual">
+                    <div class="investment-chart slideshow-container">
+                        <img src="images/slide_design-1.png" alt="Quasar Interface" class="slide active">
+                        <img src="images/slide_matrix-1.png" alt="Quasar Matrix" class="slide">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-alt">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Ilmenite</h2>
+                    <p class="about-subtitle">Where Tradition Meets Innovation</p>
+                    <p>Founded on the principles of excellence and sophistication, Ilmenite represents the perfect
+                        fusion of old money elegance and modern innovation. Our name, derived from the precious
+                        titanium-iron oxide mineral, reflects our commitment to rare quality and enduring value.</p>
+                    <p>We believe in creating experiences that transcend the ordinary—whether through our meticulously
+                        crafted software solutions, our curated luxury merchandise, or our thoughtful approach to
+                        investment
+                        guidance. Every aspect of our company is designed to embody the timeless sophistication of
+                        established wealth while embracing the possibilities of tomorrow.</p>
+
+                    <div class="founder-story">
+                        <h3>Our Founder</h3>
+                        <p>Ilmenite was founded on April 19, 2023, by San (born May 8, 2008)—a visionary entrepreneur
+                            who embodies the next generation of luxury business leadership. As a teen founder, San
+                            recognized the opportunity to bridge traditional wealth-building principles with modern
+                            digital innovation, creating a company that honors the sophistication of old money while
+                            pioneering new frontiers in technology, luxury goods, and investment guidance.</p>
+                        <p>This unique perspective—combining youthful innovation with timeless elegance—defines
+                            everything we do at Ilmenite, ensuring our offerings remain both cutting-edge and
+                            classically refined.</p>
+                    </div>
+                </div>
+                <div class="about-values">
+                    <div class="value-item">
+                        <h4>Excellence</h4>
+                        <p>Uncompromising quality in everything we create</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Sophistication</h4>
+                        <p>Refined elegance that stands the test of time</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Legacy</h4>
+                        <p>Building lasting value for generations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>We welcome inquiries from those who appreciate quality and sophistication.</p>
+
+                </div>
+                <div class="contact-form">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="8db93d71-46b3-471d-a8bc-84b661e5a295">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from Ilmenite Website">
+
+
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry_type">Inquiry Type</label>
+                            <select id="inquiry_type" name="inquiry_type" required title="Select the type of inquiry"
+                                autocomplete="off">
+                                <option value="">Select Inquiry Type</option>
+                                <option value="merchandise">Merchandise</option>
+                                <option value="attache">Attache / AI Agents</option>
+                                <option value="donation">Donation / Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required
+                                autocomplete="off"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/ilmenite_logo.png" alt="Ilmenite" class="logo-icon">
+                    <span class="logo-text">ILMENITE</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#works">Works</a></li>
+                            <li><a href="#merchandise">Merchandise</a></li>
+                            <li><a href="#support">Donation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ilmenite. All rights reserved. Crafted with sophistication.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vapi Call Overlay -->
+    <div id="vapi-overlay" class="vapi-overlay">
+        <div class="vapi-overlay-content">
+            <div class="vapi-status-indicator">
+                <div id="vapi-visualizer-container"></div>
+                <!-- <div class="vapi-pulse"></div>
+                <div class="vapi-pulse-inner"></div>
+                <img src="images/ilmenite_logo.png" alt="Ilmenite AI" class="vapi-logo-mini"> -->
+            </div>
+            <h3>Attache AI is Listening</h3>
+            <p>Speak clearly to interact with the system.</p>
+            <button id="vapi-end-button" class="btn btn-outline">End Session</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="visualizer.js"></script>
+    <script src="magnetic.js"></script>
+</body>
+
+</html>

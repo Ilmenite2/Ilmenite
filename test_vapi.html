@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Testing Vapi</h1>
+    <script type="module">
+        import Vapi from "https://esm.sh/@vapi-ai/web";
+        console.log("Vapi module imported");
+        console.log(Vapi);
+        console.log("type:", typeof Vapi);
+        if (Vapi.default) console.log("Has default:", Vapi.default);
+        
+        // Write to DOM for easy scraping
+        document.body.innerHTML += `<div id="res">${typeof Vapi} ${typeof Vapi.default}</div>`;
+    </script>
+</body>
+</html>
