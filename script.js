@@ -319,7 +319,7 @@ function setupVapiInteractions() {
                 haptic([20, 20, 20, 50, 20, 50, 20, 50]);
                 
                 const connectionTimeout = setTimeout(() => {
-                    btn.innerHTML = btn.id === 'vapi-start-button' ? 'TRY THE ATTACHÉ EXPERIENCE' : 'TRY IT NOW';
+                    btn.innerHTML = btn.id === 'vapi-start-button' ? 'Try It' : 'Try It';
                     showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
                 }, 12000);
 
@@ -332,7 +332,7 @@ function setupVapiInteractions() {
             }
         } catch (err) {
             console.error('Vapi Start Error:', err);
-            btn.innerHTML = btn.id === 'vapi-start-button' ? 'TRY THE ATTACHÉ EXPERIENCE' : 'TRY IT NOW';
+            btn.innerHTML = btn.id === 'vapi-start-button' ? 'Try It' : 'Try It';
             showNotification("VAPI ERROR: " + (err.message || "FAILED TO START"));
         }
     };
@@ -403,14 +403,14 @@ const initVapi = async () => {
 
         vapiInstance.on('call-end', () => {
             console.log('Call has ended');
-            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
+            if (vapiButton) vapiButton.innerHTML = 'Try It';
             if (overlay) overlay.classList.remove('active');
             document.body.style.overflow = '';
         });
 
         vapiInstance.on('error', (e) => {
             console.error('Vapi Error:', e);
-            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
+            if (vapiButton) vapiButton.innerHTML = 'Try It';
             
             let msg = "VAPI ERROR: CONNECTION RESTRICTED.";
             if (window.location.protocol === 'file:') {
@@ -438,18 +438,11 @@ function updateProductColor(color, imgSrc) {
 
     if (!mainImg) return;
 
-    // Cinematic Transition: Shrink and Blur
-    mainImg.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-    mainImg.style.opacity = '0.3';
-    mainImg.style.filter = 'blur(10px) drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
-    mainImg.style.transform = 'scale(0.9)';
-    
-    setTimeout(() => {
-        mainImg.src = imgSrc;
-        mainImg.style.opacity = '1';
-        mainImg.style.filter = 'blur(0px) drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
-        mainImg.style.transform = 'scale(1)';
-    }, 400);
+    // Clean instant src swap — CSS transition handles the animation
+    mainImg.src = imgSrc;
+    mainImg.style.opacity = '1';
+    mainImg.style.filter = 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
+    mainImg.style.transform = '';
 
     // Update active swatch
     swatches.forEach(s => s.classList.remove('active'));
@@ -466,7 +459,17 @@ function initKineticDrift() {
     
     if (!container || !img) return;
 
+    const isMobile = () => window.innerWidth <= 1000;
+
+    // Mobile only: tap to zoom in/out
+    container.addEventListener('click', () => {
+        if (!isMobile()) return;
+        img.classList.toggle('polo-zoomed');
+    });
+
+    // Kinetic drift on desktop hover (disabled while zoomed)
     container.addEventListener('mousemove', (e) => {
+        if (isMobile() || img.classList.contains('polo-zoomed')) return;
         const rect = container.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -474,7 +477,8 @@ function initKineticDrift() {
     });
 
     container.addEventListener('mouseleave', () => {
-        img.style.transform = 'translate(0, 0)';
+        if (isMobile() || img.classList.contains('polo-zoomed')) return;
+        img.style.transform = 'translateY(-8%)';
     });
 }
 
@@ -589,6 +593,77 @@ function initExecutiveInteractions() {
     });
 }
 
+/**
+ * --- QUASAR IMAGE SLIDESHOW ---
+ * Auto-advances every 60 seconds. Tap to advance manually.
+ */
+function initSlideshow() {
+    const container = document.querySelector('.slideshow-container');
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.slide');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    let timer;
+
+    function showSlide(idx) {
+        slides[current].classList.remove('active');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('active');
+    }
+
+    function nextSlide() {
+        showSlide(current + 1);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(nextSlide, 60000); // 1 minute
+    }
+
+    // Manual tap to advance
+    container.addEventListener('click', () => {
+        nextSlide();
+        resetTimer(); // reset the 1-min countdown on manual tap
+    });
+
+    resetTimer(); // Start auto-switching
+}
+
+/**
+ * --- MERCH COLOUR SHOWCASE ---
+ * Starts on Sand, cycles every 1.5 seconds through all colours.
+ */
+function initMerchShowcase() {
+    const colours = [
+        { key: 'sand',  src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png' },
+        { key: 'black', src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png' },
+        { key: 'grey',  src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e088c52.png' },
+        { key: 'white', src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e094156.png' },
+    ];
+    let idx = 0;
+    let showcaseTimer;
+
+    // Set sand as default instantly
+    updateProductColor(colours[0].key, colours[0].src);
+
+    function advance() {
+        idx = (idx + 1) % colours.length;
+        updateProductColor(colours[idx].key, colours[idx].src);
+    }
+
+    showcaseTimer = setInterval(advance, 1500);
+
+    // Stop auto-cycling when the user manually clicks a swatch
+    document.querySelectorAll('.merch-empire-swatch').forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            clearInterval(showcaseTimer);
+            showcaseTimer = null; // user is in control now
+        });
+    });
+}
+
 // Global Activation (Final Unified)
 window.addEventListener('load', () => {
     setupVapiInteractions(); 
@@ -598,6 +673,8 @@ window.addEventListener('load', () => {
     initIntersectionObserver();
     detectInAppBrowser();
     initSmoothScroll();
+    initSlideshow();
+    initMerchShowcase();
     
     // System Status Update
     setTimeout(() => {
@@ -657,16 +734,16 @@ function showNotification(msg) {
  * Smooth Scroll for all anchors
  */
 function initSmoothScroll() {
+    const NAVBAR_HEIGHT = 80;
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
+            if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (!target) return;
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT;
+            window.scrollTo({ top, behavior: 'smooth' });
         });
     });
 }

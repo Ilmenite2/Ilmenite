@@ -27,6 +27,10 @@
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
+html {
+    scroll-padding-top: 80px; /* Anchor snaps safely behind the transparent navbar */
+}
+
 body {
     font-family: 'Cormorant Garamond', serif;
     background-color: var(--primary-black);
@@ -34,8 +38,16 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     user-select: none;
-    /* Disable text selection globally */
     -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent; /* Kills the blue/grey tap highlight on mobile */
+    padding-top: 0;
+}
+
+/* Extra enforcement for all interactive merch elements */
+.merch-empire, .merch-empire * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 input,
@@ -531,13 +543,13 @@ p {
     width: 100%;
     max-height: 550px;
     object-fit: contain;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 24px 48px rgba(20,18,15,0.35));
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease;
 }
 
 #merch-empire-visual:hover {
-    z-index: 5000;
-    transform: scale(1.2);
+    z-index: 5000 !important;
+    transform: scale(2) translateX(12%) !important;
 }
 
 #merch-empire-visual:hover img {
@@ -1232,8 +1244,11 @@ p {
 #merch-empire-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important; /* Force side-by-side */
+    grid-template-areas: 
+        "visual text"
+        "visual controls";
     align-items: center !important;
-    gap: 80px !important;
+    gap: 40px !important;
     max-width: 1200px !important;
     margin: 100px auto !important;
     padding: 0 40px !important;
@@ -1242,44 +1257,67 @@ p {
 }
 
 #merch-empire-visual {
+    grid-area: visual;
     position: relative !important;
     z-index: 500 !important;
     width: 100% !important;
     height: auto !important;
     min-height: 500px !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: flex-start !important; /* Lifted higher */
     justify-content: center !important;
     cursor: zoom-in !important;
 }
 
 #merch-empire-visual img {
     width: 100% !important;
-    max-width: 500px !important;
+    max-width: 650px !important; /* Increased from 500px */
     height: auto !important;
     object-fit: contain !important;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)) !important;
+    filter: drop-shadow(0 24px 48px rgba(20,18,15,0.35)) !important;
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease;
     display: block !important;
-    transform: none !important;
+    transform: translateY(-8%) !important; /* Lifted higher */
     /* Ensure no legacy transforms are cutting it off */
     margin: 0 !important;
 }
 
-#merch-empire-visual:hover {
-    z-index: 500 !important;
-    transform: scale(1.1) !important;
+/* Polo tap-to-zoom — DESKTOP: shift right toward center, scale up, float above content */
+#merch-empire-visual img.polo-zoomed {
+    transform: scale(3) translateX(35%) translateY(15%) !important;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9)) !important;
+    z-index: 999 !important;
+    position: relative !important;
+    cursor: zoom-out !important;
 }
+
+/* Polo tap-to-zoom — MOBILE: scale up and sit slightly lower */
+@media (max-width: 1000px) {
+    #merch-empire-visual img.polo-zoomed {
+        transform: scale(2.5) translateY(28%) !important;
+    }
+}
+
+/* duplicate hover block removed — see main rule above */
 
 #merch-empire-visual:hover img {
     filter: drop-shadow(0 50px 100px rgba(0,0,0,0.8)) !important;
 }
 
-.merch-empire-details {
+.merch-empire-text {
+    grid-area: text;
     padding-left: 20px !important;
     text-align: left !important;
     display: flex !important;
     flex-direction: column !important;
+}
+
+.merch-empire-controls {
+    grid-area: controls;
+    padding-left: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 20px !important;
 }
 
 .merch-empire-badge {
@@ -1426,25 +1464,33 @@ section,
 .solutions, 
 .backing-section, 
 #contact {
-    height: 100vh !important;
-    overflow-y: auto !important;
+    height: 100dvh !important; /* Dynamic Viewport: Natively shrinks exactly to exclude mobile Browser/OS overlays natively! */
+    overflow: hidden !important; /* Disables internal scroll */
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
-    padding: 60px 0 !important;
+    justify-content: center !important; /* Centers natively within the DVH bounds universally */
+    padding: 80px 0 !important; /* Perfectly symmetrical padding creates flawless safe zones, dodging the fixed navbar perfectly on both sizes */
     position: relative !important;
-    scroll-snap-align: start; /* Optional: adds a premium snap feel */
+    scroll-snap-align: start; 
+    align-items: center;
+}
+
+section > .container, #contact > .container, .hero > .container {
+    margin: auto 0;
+    width: 100%;
+    transform: scale(0.85) !important; /* The precise ~4/5ths scale shrinkage requested with luxury padding */
+    transform-origin: center center;
 }
 
 .hero {
-    height: 100vh !important;
-    padding: 0 !important;
+    height: 100dvh !important;
+    padding: 80px 0 !important;
 }
 
 @media (max-width: 1000px) {
     section, .hero, .merch-empire, .solutions, .backing-section, #contact {
-        padding: 80px 0 20px 0 !important;
-        justify-content: flex-start !important; /* Allow natural flow on mobile if content is too tall */
+        padding: 90px 0 20px 0 !important;
+        justify-content: flex-start !important; 
     }
 }
 
@@ -1502,42 +1548,149 @@ section,
 /* --- MOBILE STICKY OPTIMIZATION --- */
 @media (max-width: 1000px) {
     #merch-empire-grid {
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: 1.2fr 1fr !important;
+        grid-template-areas:
+            "visual text"
+            "controls controls" !important;
         text-align: left !important;
-        gap: 15px !important;
-        position: relative !important;
-        padding-top: 10px !important;
+        gap: 20px !important;
+        padding-top: 30px !important;
     }
     
-    .merch-empire-visual {
+    #merch-empire-visual {
+        grid-area: visual;
         position: relative !important;
-        top: auto !important;
         height: auto !important;
         z-index: 10 !important;
         background: transparent !important;
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-start !important;
         justify-content: center !important;
-        backdrop-filter: none !important;
-        box-shadow: none !important;
-        border-bottom: none !important;
+    }
+
+    .merch-empire-visual img {
+        max-width: 100% !important;
+    }
+
+    .merch-empire-text {
+        grid-area: text;
+        padding: 0 5px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    
+    .merch-empire-text h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .merch-empire-description {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .merch-empire-controls {
+        grid-area: controls;
+        padding: 0 !important;
+        width: 100%;
+        margin-top: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .merch-empire-swatches {
+        justify-content: center !important;
     }
 
     .mobile-compact-controls {
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 8px !important;
+        align-items: center !important;
+        gap: 12px !important;
         margin-bottom: 20px !important;
         padding: 0 !important;
+        width: 100% !important;
     }
 
     .merch-empire-price {
-        font-size: 1.8rem !important; /* Scaled for mobile */
+        font-size: 2.2rem !important;
         margin-bottom: 5px !important;
     }
-}
 
+    /* Compress Works Grid Mobile */
+    .works-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .work-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .work-image {
+        width: 130px;
+        height: auto;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+    }
+
+    .work-image img {
+        max-width: 90%;
+    }
+
+    .work-info {
+        padding: 10px 15px;
+    }
+
+    .work-info p {
+        display: none;
+    }
+
+    .work-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .card-buttons {
+        margin-top: 5px !important;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .status-badge {
+        font-size: 0.55rem;
+        padding: 4px 8px;
+        top: 8px;
+        left: 8px;
+    }
+
+    .work-tags {
+        display: none;
+    }
+
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+}
 /* --- PULSE BUTTON ANIMATION --- */
 .btn-pulse {
     position: relative;
@@ -1566,5 +1719,246 @@ section,
     #vapi-visualizer-container {
         width: 200px;
         height: 200px;
+    }
+}
+
+/* =====================================
+   MOBILE LAYOUT (≤ 1000px)
+   ===================================== */
+@media (max-width: 1000px) {
+
+    /* --- Section height: screen minus the fixed navbar (80px) --- */
+    section, .merch-empire, .solutions, .backing-section, #contact {
+        height: calc(100dvh - 80px) !important;
+        padding: 20px 0 !important;
+        overflow: hidden !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Hero: use full dvh, push content down past navbar with padding-top */
+    .hero {
+        height: 100dvh !important;
+        padding: 80px 0 20px 0 !important; /* 80px clears navbar at top, 20px breathing at bottom */
+        overflow: hidden !important;
+        justify-content: center !important;
+    }
+
+    /* Solutions (#works): vertically center the 2 cards, no dead space below */
+    #works {
+        justify-content: center !important;
+    }
+    #works .works-grid {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* Pulse: shrink the Quasar image to fit, don't hide it */
+    .investment-visual {
+        display: block !important;
+    }
+    .investment-chart, .slideshow-container {
+        height: 220px !important;
+        overflow: hidden !important;
+        border-radius: 6px !important;
+    }
+    .investment-chart img, .slideshow-container img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* About: hide founder story box on mobile so text fits without clipping */
+    .founder-story {
+        display: none !important;
+    }
+    /* Reduce about text so it all fits */
+    .about-content p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Contact: make sure buttons aren't clipped at bottom */
+    #contact {
+        padding-bottom: 30px !important;
+    }
+    .contact-form .btn, .contact-cta .btn {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* --- Remove the desktop scale — it creates dead space on mobile --- */
+    section > .container, #contact > .container, .hero > .container {
+        transform: none !important;
+        margin: 0 auto !important;
+        padding: 0 16px !important;
+    }
+
+    /* --- Section headers --- */
+    .section-header {
+        margin-bottom: 12px !important;
+        text-align: center !important;
+    }
+    .section-header h2 {
+        font-size: 1.6rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.1 !important;
+    }
+    .section-header p {
+        font-size: 0.85rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* #works section header — breathing room above cards */
+    #works .section-header {
+        margin-top: 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* --- Works / Solutions: premium cards, full description --- */
+    .works-grid {
+        gap: 14px !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+    }
+    .work-card {
+        padding: 18px 16px !important;
+        display: flex !important;
+        align-items: flex-start !important; /* top-align so badge+title+desc+btn all flow naturally */
+        gap: 16px !important;
+        border-left: 2px solid var(--khaki) !important; /* gold accent */
+        border-radius: 0 10px 10px 0 !important;
+    }
+    .work-image {
+        width: 90px !important;
+        flex-shrink: 0 !important;
+        border-radius: 6px !important;
+        overflow: hidden !important;
+        margin-top: 4px !important;
+    }
+    /* Override global position:absolute on status-badge for mobile card layout */
+    .work-info .status-badge {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        display: inline-block !important;
+        font-size: 0.6rem !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        border: 1px solid var(--khaki) !important;
+        color: var(--khaki) !important;
+        background: transparent !important;
+        padding: 2px 8px !important;
+        border-radius: 20px !important;
+        box-shadow: none !important;
+        margin-bottom: 6px !important;
+    }
+    .work-card h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.1 !important;
+    }
+    .work-card p {
+        font-size: 0.8rem !important;
+        margin-bottom: 8px !important;
+        line-height: 1.5 !important;
+        display: block !important; /* Remove line-clamp — show full description */
+        overflow: visible !important;
+        opacity: 0.75 !important;
+    }
+    .work-tags {
+        display: none !important; /* Hide tags on mobile to save space */
+    }
+    .btn {
+        padding: 7px 16px !important;
+        font-size: 0.78rem !important;
+    }
+    .card-buttons {
+        margin-top: 6px !important;
+        gap: 8px !important;
+        flex-wrap: wrap !important;
+    }
+
+    /* ==============================
+       MERCH: VERTICAL STACK LAYOUT
+       ============================== */
+    #merch-empire-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    #merch-empire-visual {
+        width: 55% !important;
+        height: auto !important;
+        min-height: unset !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+
+    #merch-empire-visual img {
+        width: 100% !important;
+        max-width: 200px !important;
+        height: auto !important;
+        transform: none !important;
+    }
+
+    .merch-empire-text {
+        text-align: center !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .merch-empire-badge {
+        margin: 0 auto 6px !important;
+    }
+    .merch-empire-text h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.1 !important;
+    }
+    .merch-empire-price {
+        font-size: 1.6rem !important;
+        margin-bottom: 4px !important;
+    }
+    .merch-empire-description {
+        display: none !important;
+    }
+
+    .merch-empire-controls {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    .merch-option-group label {
+        font-size: 0.75rem !important;
+        margin-bottom: 6px !important;
+    }
+    .merch-empire-swatches {
+        justify-content: center !important;
+        gap: 10px !important;
+        margin-bottom: 8px !important;
+    }
+    .merch-empire-swatch {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    .size-select {
+        height: 36px !important;
+        font-size: 0.8rem !important;
+        padding: 0 12px !important;
+        width: 100% !important;
+        max-width: 200px !important;
+    }
+    .merch-empire-cta .btn {
+        width: 100% !important;
+        max-width: 260px !important;
     }
 }

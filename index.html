@@ -69,7 +69,7 @@
                     <p class="hero-description">Crafting exceptional software solutions, curating luxury merchandise, and guiding your investment journey with the sophistication of old money tradition.</p>
                     <div class="hero-buttons">
                         <a href="#works" class="btn btn-primary">OUR WORKS</a>
-                        <a href="#merch-empire-grid" class="btn btn-outline btn-pulse">PULSE</a>
+                        <a href="#pulse" class="btn btn-outline btn-pulse">PULSE</a>
                     </div>
 
                 </div>
@@ -90,13 +90,12 @@
             <div class="works-grid">
                 <div class="work-card">
                     <div class="work-image">
-                        <span class="status-badge">Live Now</span>
                         <img src="images/attache_thumb.png" alt="Attache AI" loading="lazy" decoding="async">
                     </div>
                     <div class="work-info">
+                        <span class="status-badge">Live Now</span>
                         <h3>Attache</h3>
                         <p>Your digital sovereign representative. A sophisticated AI telephony system that manages connectivity, inquiries, and bookings with the discretion and precision of a private attaché.</p>
-                        <button id="vapi-start-button" class="btn btn-primary" style="margin-top: 15px; width: 100%;">TRY THE ATTACHÉ EXPERIENCE</button>
                         <ul class="work-tags">
                             <li>Telephony Intelligence</li>
                             <li>Concierge AI</li>
@@ -105,18 +104,17 @@
                         <div class="card-buttons" style="display: flex; gap: 10px; margin-top: 1.5rem;">
                             <a href="#contact" class="btn btn-primary"
                                 style="padding: 10px 20px; font-size: 0.9rem;">Order Now</a>
-                            <a href="javascript:void(0)" id="vapi-try-button" class="btn btn-outline vapi-try-trigger"
+                            <a href="javascript:void(0)" id="vapi-start-button" class="btn btn-outline vapi-try-trigger"
                                 style="padding: 10px 20px; font-size: 0.9rem;">Try It</a>
                         </div>
-
                     </div>
                 </div>
                 <div class="work-card">
                     <div class="work-image">
-                        <span class="status-badge">In Development</span>
                         <img src="images/quasar_thumb.png" alt="Quasar System" loading="lazy" decoding="async">
                     </div>
                     <div class="work-info">
+                        <span class="status-badge" style="opacity:0.7;">In Development</span>
                         <h3>Quasar</h3>
                         <p>See what others miss. A proprietary intelligence system that distills complex market chaos
                             into absolute clarity, making sophisticated wealth creation effortless.</p>
@@ -142,29 +140,26 @@
             </div>
             <div id="merch-empire-grid" class="reveal-on-scroll">
                 <div id="merch-empire-visual">
-                    <img id="main-product-img" src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png" alt="Executive Polo Series 01">
+                    <img id="main-product-img" src="Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png" alt="Executive Polo Series 01">
                 </div>
-                <div class="merch-empire-details">
+                <div class="merch-empire-text">
                     <div class="merch-empire-badge">Launch: May 2026</div>
                     <h3>Executive Polo: Series 01</h3>
-                    <div class="mobile-compact-controls">
-                        <p class="merch-empire-price">$89.00</p>
-                        <div class="merch-option-group">
-                            <label>Foundation Color</label>
-                            <div class="merch-empire-swatches">
-                                <div class="merch-empire-swatch active" style="background-color: #1a1a1a;" onclick="updateProductColor('black', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png')" title="Obsidian Black"></div>
-                                <div class="merch-empire-swatch" style="background-color: #d2b48c;" onclick="updateProductColor('sand', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png')" title="Sovereign Sand"></div>
-                                <div class="merch-empire-swatch" style="background-color: #808080;" onclick="updateProductColor('grey', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e088c52.png')" title="Technical Grey"></div>
-                                <div class="merch-empire-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="updateProductColor('white', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e094156.png')" title="Foundation White"></div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <p class="merch-empire-price">$89.00</p>
                     <p class="merch-empire-description">
                         The definitive technical garment for the modern founder. Crafted from 190g/m² premium pique cotton with silk-stitched wide-track 'I L M E N I T E' embroidery.
                     </p>
-
-
+                </div>
+                <div class="merch-empire-controls">
+                    <div class="merch-option-group">
+                        <label>Foundation Color</label>
+                        <div class="merch-empire-swatches">
+                            <div class="merch-empire-swatch" style="background-color: #1a1a1a;" onclick="updateProductColor('black', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png')" title="Obsidian Black"></div>
+                            <div class="merch-empire-swatch active" style="background-color: #d2b48c;" onclick="updateProductColor('sand', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png')" title="Sovereign Sand"></div>
+                            <div class="merch-empire-swatch" style="background-color: #808080;" onclick="updateProductColor('grey', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e088c52.png')" title="Technical Grey"></div>
+                            <div class="merch-empire-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" onclick="updateProductColor('white', 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e094156.png')" title="Foundation White"></div>
+                        </div>
+                    </div>
                     <div class="merch-option-group">
                         <label>Select Size</label>
                         <select class="size-select">
@@ -174,9 +169,8 @@
                             <option>X-LARGE</option>
                         </select>
                     </div>
-
                     <div class="section-cta" style="margin-top: 2rem; text-align: left;">
-                        <a href="#contact" class="btn btn-primary">Join the Exclusive Waitlist</a>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Join the Exclusive Waitlist</a>
                     </div>
                 </div>
             </div>
