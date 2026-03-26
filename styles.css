@@ -1531,25 +1531,35 @@ section,
         font-size: 2.2rem !important; /* Scaled for mobile */
         margin-bottom: 5px !important;
     }
+}
 
-    .merch-empire-swatches {
-        margin-bottom: 10px !important;
-        gap: 15px !important;
-    }
+/* --- PULSE BUTTON ANIMATION --- */
+.btn-pulse {
+    position: relative;
+    overflow: hidden;
+    animation: button-pulse-glow 3s infinite ease-in-out;
+}
 
-    .merch-empire-swatch {
-        width: 38px !important; /* Slightly smaller to fit */
-        height: 38px !important;
-    }
+@keyframes button-pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+    50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+}
 
-    .merch-empire-swatch.active {
-        box-shadow: 0 0 0 2px var(--primary-black), 0 0 0 4px var(--gold) !important;
-    }
+/* --- VAPI VISUALIZER OVERLAY --- */
+#vapi-visualizer-container {
+    width: 350px;
+    height: 350px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(139, 115, 85, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
 
-    .merch-empire-details {
-        padding: 30px 20px !important;
-        z-index: 500 !important;
-        background: var(--primary-black) !important;
-        position: relative !important;
+@media (max-width: 600px) {
+    #vapi-visualizer-container {
+        width: 200px;
+        height: 200px;
     }
 }

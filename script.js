@@ -308,44 +308,44 @@ let overlay = null;
 
 function setupVapiInteractions() {
     vapiButton = document.getElementById('vapi-start-button');
+    const tryButtons = document.querySelectorAll('.vapi-try-trigger');
     endButton = document.getElementById('vapi-end-button');
     overlay = document.getElementById('vapi-overlay');
 
+    const handleStartCall = async (btn) => {
+        try {
+            if (!vapiInstance) await initVapi();
+            if (vapiInstance) {
+                btn.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
+                haptic([20, 20, 20, 50, 20, 50, 20, 50]);
+                
+                const connectionTimeout = setTimeout(() => {
+                    btn.innerHTML = btn.id === 'vapi-start-button' ? 'TRY THE ATTACHÉ EXPERIENCE' : 'TRY IT NOW';
+                    showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
+                }, 12000);
+
+                vapiInstance.once('call-start', () => clearTimeout(connectionTimeout));
+                vapiInstance.once('error', () => clearTimeout(connectionTimeout));
+
+                await vapiInstance.start(VAPI_ASSISTANT_ID);
+            } else {
+                showNotification("VAPI ERROR: SDK NOT LOADED.");
+            }
+        } catch (err) {
+            console.error('Vapi Start Error:', err);
+            btn.innerHTML = btn.id === 'vapi-start-button' ? 'TRY THE ATTACHÉ EXPERIENCE' : 'TRY IT NOW';
+            showNotification("VAPI ERROR: " + (err.message || "FAILED TO START"));
+        }
+    };
+
     if (vapiButton) {
         setTimeout(initVapi, 500);
-        vapiButton.addEventListener('click', async () => {
-            // Immediate Feedback for Security Origin
-            if (window.location.protocol === 'file:') {
-                showNotification("SECURITY: PLEASE RUN ON LOCALHOST OR HTTPS.");
-                return;
-            }
-
-            try {
-                if (!vapiInstance) await initVapi();
-                if (vapiInstance) {
-                    vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
-                    haptic([20, 20, 20, 50, 20, 50, 20, 50]);
-                    
-                    // Connection Timeout
-                    const connectionTimeout = setTimeout(() => {
-                        vapiButton.innerHTML = 'Speak with Atsh';
-                        showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
-                    }, 12000);
-
-                    vapiInstance.once('call-start', () => clearTimeout(connectionTimeout));
-                    vapiInstance.once('error', () => clearTimeout(connectionTimeout));
-
-                    await vapiInstance.start(VAPI_ASSISTANT_ID);
-                } else {
-                    showNotification("VAPI ERROR: SDK NOT LOADED.");
-                }
-            } catch (err) {
-                console.error('Vapi Start Error:', err);
-                vapiButton.innerHTML = 'Speak with Atsh';
-                showNotification("VAPI ERROR: " + (err.message || "FAILED TO START"));
-            }
-        });
+        vapiButton.addEventListener('click', () => handleStartCall(vapiButton));
     }
+
+    tryButtons.forEach(btn => {
+        btn.addEventListener('click', () => handleStartCall(btn));
+    });
 
     if (endButton) {
         endButton.addEventListener('click', () => {
@@ -353,6 +353,7 @@ function setupVapiInteractions() {
         });
     }
 }
+
 
 /**
  * Initialize Vapi and setup listeners
@@ -376,26 +377,42 @@ const initVapi = async () => {
             
         vapiInstance.on('call-start', () => {
             console.log('Call has started');
-            haptic([100, 50, 100]); // Start buzz
+            haptic([100, 50, 100]); 
+
             if (vapiButton) {
-                vapiButton.innerHTML = 'Speak with Atsh';
+                vapiButton.innerHTML = 'Assisting...';
                 vapiButton.disabled = false;
             }
             if (overlay) {
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
+            
+            // Start Visualizer
+            if (typeof initVisualizer === 'function') initVisualizer();
+            showNotification("CONNECTION ESTABLISHED | ATTACHÉ LIVE");
+        });
+
+        vapiInstance.on('volume-level', (volume) => {
+            if (typeof sphereVisualizer !== 'undefined' && sphereVisualizer) {
+                sphereVisualizer.updateVolume(volume);
+            }
+        });
+
+        vapiInstance.on('speech-start', () => {
+            showNotification("INPUT: SPEECH DETECTED");
         });
 
         vapiInstance.on('call-end', () => {
-            if (vapiButton) vapiButton.innerHTML = 'Speak with Atsh';
+            console.log('Call has ended');
+            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
             if (overlay) overlay.classList.remove('active');
             document.body.style.overflow = '';
         });
 
         vapiInstance.on('error', (e) => {
             console.error('Vapi Error:', e);
-            if (vapiButton) vapiButton.innerHTML = 'Speak with Atsh';
+            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
             
             let msg = "VAPI ERROR: CONNECTION RESTRICTED.";
             if (window.location.protocol === 'file:') {
@@ -407,6 +424,7 @@ const initVapi = async () => {
             }
             showNotification(msg);
         });
+
     } catch (err) {
         console.error('Error creating Vapi instance:', err);
     }
