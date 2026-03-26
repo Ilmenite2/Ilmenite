@@ -68,7 +68,6 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-// Observe elements for animation
 document.querySelectorAll('.work-card, .merch-item, .feature, .value-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -367,9 +366,8 @@ const initVapi = async () => {
                              (typeof vapiSDK !== 'undefined' ? vapiSDK.default : null);
 
         if (!VapiConstructor) {
-            const module = await import('https://esm.sh/@vapi-ai/web');
-            VapiConstructor = module.default || module;
-            window.Vapi = VapiConstructor;
+            console.error('Vapi SDK not loaded yet. Check network or scripts.');
+            return;
         }
 
         vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
@@ -591,7 +589,6 @@ function initExecutiveInteractions() {
     });
 }
 
-// Global Activation
 // Global Activation (Final Unified)
 window.addEventListener('load', () => {
     setupVapiInteractions(); 

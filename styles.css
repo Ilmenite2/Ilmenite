@@ -1344,16 +1344,19 @@ p {
 
 @media (max-width: 1000px) {
     #merch-empire-grid {
-        grid-template-columns: 1fr !important;
-        text-align: center !important;
-        gap: 50px !important;
+        grid-template-columns: 1fr 1fr !important;
+        text-align: left !important;
+        gap: 20px !important;
     }
     .merch-empire-details {
-        padding-left: 0 !important;
-        align-items: center !important;
+        padding-left: 10px !important;
+        align-items: flex-start !important;
     }
     .merch-empire-swatches {
-        justify-content: center !important;
+        justify-content: flex-start !important;
+    }
+    .merch-empire-visual img {
+        max-width: 100% !important;
     }
 }
 
@@ -1423,11 +1426,12 @@ section,
 .solutions, 
 .backing-section, 
 #contact {
-    min-height: 100vh !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    padding: 100px 0 !important;
+    padding: 60px 0 !important;
     position: relative !important;
     scroll-snap-align: start; /* Optional: adds a premium snap feel */
 }
@@ -1439,7 +1443,7 @@ section,
 
 @media (max-width: 1000px) {
     section, .hero, .merch-empire, .solutions, .backing-section, #contact {
-        padding: 80px 0 !important;
+        padding: 80px 0 20px 0 !important;
         justify-content: flex-start !important; /* Allow natural flow on mobile if content is too tall */
     }
 }
@@ -1498,37 +1502,38 @@ section,
 /* --- MOBILE STICKY OPTIMIZATION --- */
 @media (max-width: 1000px) {
     #merch-empire-grid {
-        grid-template-columns: 1fr !important;
-        text-align: center !important;
-        gap: 0 !important; /* Managed by sticky padding */
+        grid-template-columns: 1fr 1fr !important;
+        text-align: left !important;
+        gap: 15px !important;
         position: relative !important;
+        padding-top: 10px !important;
     }
     
     .merch-empire-visual {
-        position: sticky !important;
-        top: 80px !important;
-        height: 30vh !important; /* Extremely compact for S23 Ultra */
-        z-index: 1000 !important;
-        background: rgba(10, 10, 10, 0.98) !important;
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        z-index: 10 !important;
+        background: transparent !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        backdrop-filter: blur(15px) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.8) !important;
-        border-bottom: 1px solid rgba(139, 115, 85, 0.2) !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+        border-bottom: none !important;
     }
 
     .mobile-compact-controls {
         display: flex !important;
         flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
-        margin-bottom: 25px !important;
-        padding: 0 10px !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        margin-bottom: 20px !important;
+        padding: 0 !important;
     }
 
     .merch-empire-price {
-        font-size: 2.2rem !important; /* Scaled for mobile */
+        font-size: 1.8rem !important; /* Scaled for mobile */
         margin-bottom: 5px !important;
     }
 }
