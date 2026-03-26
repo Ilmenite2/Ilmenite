@@ -370,6 +370,8 @@ const initVapi = async () => {
         attempts++;
 
         const VapiConstructor = window.Vapi || 
+                              (window.Vapi && window.Vapi.default) ||
+                              window.VapiSDK || 
                               (window.vapiSDK ? window.vapiSDK.default : null) || 
                               (typeof vapiSDK !== 'undefined' ? vapiSDK : null);
 
