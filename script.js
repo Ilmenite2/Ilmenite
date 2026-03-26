@@ -314,21 +314,35 @@ function setupVapiInteractions() {
     if (vapiButton) {
         setTimeout(initVapi, 500);
         vapiButton.addEventListener('click', async () => {
-            if (!vapiInstance) await initVapi();
-            if (vapiInstance) {
-                vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
-                haptic([20, 20, 20, 50, 20, 50, 20, 50]);
-                
-                // Connection Timeout
-                const connectionTimeout = setTimeout(() => {
-                    vapiButton.innerHTML = 'Speak with Atsh';
-                    showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
-                }, 10000);
+            // Immediate Feedback for Security Origin
+            if (window.location.protocol === 'file:') {
+                showNotification("SECURITY: PLEASE RUN ON LOCALHOST OR HTTPS.");
+                return;
+            }
 
-                vapiInstance.once('call-start', () => clearTimeout(connectionTimeout));
-                vapiInstance.once('error', () => clearTimeout(connectionTimeout));
+            try {
+                if (!vapiInstance) await initVapi();
+                if (vapiInstance) {
+                    vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
+                    haptic([20, 20, 20, 50, 20, 50, 20, 50]);
+                    
+                    // Connection Timeout
+                    const connectionTimeout = setTimeout(() => {
+                        vapiButton.innerHTML = 'Speak with Atsh';
+                        showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
+                    }, 12000);
 
-                vapiInstance.start(VAPI_ASSISTANT_ID);
+                    vapiInstance.once('call-start', () => clearTimeout(connectionTimeout));
+                    vapiInstance.once('error', () => clearTimeout(connectionTimeout));
+
+                    await vapiInstance.start(VAPI_ASSISTANT_ID);
+                } else {
+                    showNotification("VAPI ERROR: SDK NOT LOADED.");
+                }
+            } catch (err) {
+                console.error('Vapi Start Error:', err);
+                vapiButton.innerHTML = 'Speak with Atsh';
+                showNotification("VAPI ERROR: " + (err.message || "FAILED TO START"));
             }
         });
     }
@@ -562,13 +576,18 @@ function initExecutiveInteractions() {
 // Global Activation
 // Global Activation (Final Unified)
 window.addEventListener('load', () => {
-    setupVapiInteractions(); // Restored
+    setupVapiInteractions(); 
     initHeroCanvas();
     initKineticDrift();
     initExecutiveInteractions();
     initIntersectionObserver();
     detectInAppBrowser();
     initSmoothScroll();
+    
+    // System Status Update
+    setTimeout(() => {
+        showNotification("SYSTEM CORE: ONLINE | AI READY");
+    }, 1500);
 });
 
 /**

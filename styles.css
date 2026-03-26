@@ -1416,13 +1416,34 @@ body, p, span, li, a,
     border-radius: 50%;
 }
 
-.event-date {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--khaki);
-    margin-bottom: 5px;
-    letter-spacing: 2px;
+/* --- CINEMATIC PAGING & SECTION NORMALIZATION --- */
+section, 
+.hero, 
+.merch-empire, 
+.solutions, 
+.backing-section, 
+#contact {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 100px 0 !important;
+    position: relative !important;
+    scroll-snap-align: start; /* Optional: adds a premium snap feel */
 }
+
+.hero {
+    height: 100vh !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 1000px) {
+    section, .hero, .merch-empire, .solutions, .backing-section, #contact {
+        padding: 80px 0 !important;
+        justify-content: flex-start !important; /* Allow natural flow on mobile if content is too tall */
+    }
+}
+
 
 /* --- EXECUTIVE NOTIFICATION SYSTEM --- */
 #executive-notifications {
@@ -1486,30 +1507,49 @@ body, p, span, li, a,
     .merch-empire-visual {
         position: sticky !important;
         top: 80px !important;
-        height: 40vh !important; /* Take up half the screen */
+        height: 30vh !important; /* Extremely compact for S23 Ultra */
         z-index: 1000 !important;
-        background: rgba(10, 10, 10, 0.95) !important;
+        background: rgba(10, 10, 10, 0.98) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        backdrop-filter: blur(10px) !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        backdrop-filter: blur(15px) !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.8) !important;
+        border-bottom: 1px solid rgba(139, 115, 85, 0.2) !important;
     }
 
-    #main-product-img {
-        max-height: 90% !important;
-        width: auto !important;
+    .mobile-compact-controls {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-bottom: 25px !important;
+        padding: 0 10px !important;
     }
 
-    .merch-empire-details {
-        padding: 40px 20px !important;
-        z-index: 500 !important;
-        background: var(--primary-black) !important;
-        position: relative !important;
+    .merch-empire-price {
+        font-size: 2.2rem !important; /* Scaled for mobile */
+        margin-bottom: 5px !important;
     }
 
     .merch-empire-swatches {
-        justify-content: center !important;
-        margin-bottom: 40px !important;
+        margin-bottom: 10px !important;
+        gap: 15px !important;
+    }
+
+    .merch-empire-swatch {
+        width: 38px !important; /* Slightly smaller to fit */
+        height: 38px !important;
+    }
+
+    .merch-empire-swatch.active {
+        box-shadow: 0 0 0 2px var(--primary-black), 0 0 0 4px var(--gold) !important;
+    }
+
+    .merch-empire-details {
+        padding: 30px 20px !important;
+        z-index: 500 !important;
+        background: var(--primary-black) !important;
+        position: relative !important;
     }
 }
