@@ -355,121 +355,188 @@ function setupVapiInteractions() {
 
 
 /**
- * Initialize Vapi and setup listeners
+/**
+ * Initialize Vapi with retry polling — SDK may load slightly after page
  */
 const initVapi = async () => {
     if (vapiInstance) return;
 
-    try {
-        let VapiConstructor = window.Vapi || 
-                             (window.vapiSDK ? window.vapiSDK.default : null) || 
-                             (typeof vapiSDK !== 'undefined' ? vapiSDK.default : null);
+    // SDK Polling (Max 10s)
+    let attempts = 0;
+    const maxAttempts = 20;
+
+    const tryInit = async () => {
+        if (vapiInstance) return;
+        attempts++;
+
+        const VapiConstructor = window.Vapi || 
+                              (window.vapiSDK ? window.vapiSDK.default : null) || 
+                              (typeof vapiSDK !== 'undefined' ? vapiSDK : null);
 
         if (!VapiConstructor) {
-            console.error('Vapi SDK not loaded yet. Check network or scripts.');
+            if (attempts < maxAttempts) {
+                setTimeout(tryInit, 500);
+            } else {
+                console.error('Vapi SDK failed to load after 10s.');
+                showNotification("VAPI ERROR: SDK NOT AVAILABLE");
+            }
             return;
         }
 
-        vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
-        console.log('Vapi initialized successfully');
-            
-        vapiInstance.on('call-start', () => {
-            console.log('Call has started');
-            haptic([100, 50, 100]); 
+        try {
+            vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
+            console.log('Vapi initialized successfully (attempt ' + attempts + ')');
 
-            if (vapiButton) {
-                vapiButton.innerHTML = 'Assisting...';
-                vapiButton.disabled = false;
-            }
-            if (overlay) {
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            // Start Visualizer
-            if (typeof initVisualizer === 'function') initVisualizer();
-            showNotification("CONNECTION ESTABLISHED | ATTACHÉ LIVE");
-        });
+            vapiInstance.on('call-start', () => {
+                haptic([100, 50, 100]);
+                if (vapiButton) vapiButton.innerHTML = 'Assisting...';
+                if (overlay) {
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+                if (typeof initVisualizer === 'function') initVisualizer();
+                showNotification('CONNECTION ESTABLISHED | ATTACHÉ LIVE');
+            });
 
-        vapiInstance.on('volume-level', (volume) => {
-            if (typeof sphereVisualizer !== 'undefined' && sphereVisualizer) {
-                sphereVisualizer.updateVolume(volume);
-            }
-        });
+            vapiInstance.on('volume-level', (volume) => {
+                if (typeof sphereVisualizer !== 'undefined' && sphereVisualizer) {
+                    sphereVisualizer.updateVolume(volume);
+                }
+            });
 
-        vapiInstance.on('speech-start', () => {
-            showNotification("INPUT: SPEECH DETECTED");
-        });
+            vapiInstance.on('call-end', () => {
+                if (vapiButton) vapiButton.innerHTML = 'Try It';
+                if (overlay) overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
 
-        vapiInstance.on('call-end', () => {
-            console.log('Call has ended');
-            if (vapiButton) vapiButton.innerHTML = 'Try It';
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+            vapiInstance.on('error', (e) => {
+                console.error('Vapi Error:', e);
+                if (vapiButton) vapiButton.innerHTML = 'Try It';
+                let msg = 'VAPI ERROR: CONNECTION RESTRICTED.';
+                if (window.location.protocol === 'file:') {
+                    msg = 'SECURITY: RUN ON LOCALHOST OR HTTPS.';
+                } else if (e.message && e.message.includes('mic')) {
+                    msg = 'PERMISSION: MICROPHONE BLOCKED.';
+                }
+                showNotification(msg);
+            });
 
-        vapiInstance.on('error', (e) => {
-            console.error('Vapi Error:', e);
-            if (vapiButton) vapiButton.innerHTML = 'Try It';
-            
-            let msg = "VAPI ERROR: CONNECTION RESTRICTED.";
-            if (window.location.protocol === 'file:') {
-                msg = "SECURITY: PLEASE RUN ON LOCALHOST OR HTTPS.";
-            } else if (e.message && e.message.includes('mic')) {
-                msg = "PERMISSION: MICROPHONE ACCESS BLOCKED.";
-            } else if (e.message && e.message.includes('key')) {
-                msg = "AUTH: INVALID VAPI PUBLIC KEY.";
-            }
-            showNotification(msg);
-        });
+        } catch (err) {
+            console.error('Vapi Constructor Error:', err);
+        }
+    };
 
-    } catch (err) {
-        console.error('Error creating Vapi instance:', err);
-    }
+    tryInit();
 };
 
 
 /**
  * --- KINETIC MERCHANDISE INTERFACE ---
  */
-function updateProductColor(color, imgSrc) {
+let poloZoomed = false;
+let poloBaseRect = null; // Cache for stable measurement
+
+function getPoloMetrics() {
+    const img = document.getElementById('main-product-img');
+    if (!img) return null;
+    
+    // Temporarily reset to natural base to measure accurately
+    const prevTransform = img.style.transform;
+    const prevTransition = img.style.transition;
+    
+    img.style.transition = 'none';
+    img.style.setProperty('transform', 'translateY(-8%)', 'important');
+    
+    const rect = img.getBoundingClientRect();
+    
+    // Restore
+    img.style.setProperty('transform', prevTransform, 'important');
+    // Force reflow before restoring transition to hide the jump
+    img.offsetHeight; 
+    img.style.transition = prevTransition;
+    
+    return rect;
+}
+
+function setDefaultPoloPosition() {
+    const img = document.getElementById('main-product-img');
+    if (!img) return;
+    img.style.transition = 'transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)';
+    img.style.setProperty('transform', 'translateY(-8%)', 'important');
+    poloZoomed = false;
+    img.style.cursor = 'zoom-in';
+}
+
+function setShowcasePoloPosition() {
+    const img = document.getElementById('main-product-img');
+    if (!img) return;
+
+    // Use cached metrics or measure if first time
+    if (!poloBaseRect) poloBaseRect = getPoloMetrics();
+    if (!poloBaseRect) return;
+
+    const vh = window.innerHeight;
+    const scale = 2.0;
+
+    const imgCenterY = poloBaseRect.top + poloBaseRect.height / 2;
+    const vpCenterY = vh * 0.52; // Very subtle down shift as requested
+
+    const ty = (vpCenterY - imgCenterY) / scale;
+
+    img.style.transition = 'transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+    img.style.setProperty('transform', `scale(${scale}) translateY(${ty}px)`, 'important');
+    img.style.zIndex = '9999';
+    poloZoomed = true;
+    img.style.cursor = 'zoom-out';
+}
+
+function updateProductColor(color, imgSrc, silent = false) {
     const mainImg = document.getElementById('main-product-img');
     const swatches = document.querySelectorAll('.merch-empire-swatch');
 
     if (!mainImg) return;
 
-    // Clean instant src swap — CSS transition handles the animation
     mainImg.src = imgSrc;
     mainImg.style.opacity = '1';
-    mainImg.style.filter = 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))';
-    mainImg.style.transform = '';
+    
+    if (poloZoomed) {
+        setShowcasePoloPosition();
+    } else {
+        setDefaultPoloPosition();
+    }
 
-    // Update active swatch
     swatches.forEach(s => s.classList.remove('active'));
     const activeSwatch = Array.from(swatches).find(s => s.title.toLowerCase().includes(color));
     if (activeSwatch) activeSwatch.classList.add('active');
     
-    // Haptic Feedback for swatch change
-    haptic([50, 50, 50, 50]);
+    // Only fire haptics for manual user interaction
+    if (!silent) {
+        haptic([50, 50, 50, 50]);
+    }
 }
 
 function initKineticDrift() {
     const container = document.getElementById('merch-empire-visual');
     const img = document.getElementById('main-product-img');
-    
     if (!container || !img) return;
 
     const isMobile = () => window.innerWidth <= 1000;
 
-    // Mobile only: tap to zoom in/out
+    // Reset cache on resize
+    window.addEventListener('resize', () => { poloBaseRect = null; });
+
     container.addEventListener('click', () => {
         if (!isMobile()) return;
-        img.classList.toggle('polo-zoomed');
+        if (poloZoomed) {
+            setDefaultPoloPosition();
+        } else {
+            setShowcasePoloPosition();
+        }
     });
 
-    // Kinetic drift on desktop hover (disabled while zoomed)
     container.addEventListener('mousemove', (e) => {
-        if (isMobile() || img.classList.contains('polo-zoomed')) return;
+        if (isMobile() || poloZoomed) return;
         const rect = container.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -477,8 +544,8 @@ function initKineticDrift() {
     });
 
     container.addEventListener('mouseleave', () => {
-        if (isMobile() || img.classList.contains('polo-zoomed')) return;
-        img.style.transform = 'translateY(-8%)';
+        if (isMobile() || poloZoomed) return;
+        setDefaultPoloPosition();
     });
 }
 
@@ -645,12 +712,12 @@ function initMerchShowcase() {
     let idx = 0;
     let showcaseTimer;
 
-    // Set sand as default instantly
-    updateProductColor(colours[0].key, colours[0].src);
+    // Set sand as default instantly, silent
+    updateProductColor(colours[0].key, colours[0].src, true);
 
     function advance() {
         idx = (idx + 1) % colours.length;
-        updateProductColor(colours[idx].key, colours[idx].src);
+        updateProductColor(colours[idx].key, colours[idx].src, true);
     }
 
     showcaseTimer = setInterval(advance, 1500);

@@ -545,11 +545,20 @@ p {
     object-fit: contain;
     filter: drop-shadow(0 24px 48px rgba(20,18,15,0.35));
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease;
+    /* High-Quality Rendering Fixes */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
 }
 
-#merch-empire-visual:hover {
-    z-index: 5000 !important;
-    transform: scale(2) translateX(12%) !important;
+@media (hover: hover) {
+    #merch-empire-visual:hover {
+        z-index: 5000 !important;
+        transform: scale(2) translateX(15%) !important; /* Bigger, drift right per user correction */
+    }
 }
 
 #merch-empire-visual:hover img {
@@ -1282,21 +1291,8 @@ p {
     margin: 0 !important;
 }
 
-/* Polo tap-to-zoom — DESKTOP: shift right toward center, scale up, float above content */
-#merch-empire-visual img.polo-zoomed {
-    transform: scale(3) translateX(35%) translateY(15%) !important;
-    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9)) !important;
-    z-index: 999 !important;
-    position: relative !important;
-    cursor: zoom-out !important;
-}
+/* Mobile zoom is handled via JS state machine in script.js to ensure perfect centering */
 
-/* Polo tap-to-zoom — MOBILE: scale up and sit slightly lower */
-@media (max-width: 1000px) {
-    #merch-empire-visual img.polo-zoomed {
-        transform: scale(2.5) translateY(28%) !important;
-    }
-}
 
 /* duplicate hover block removed — see main rule above */
 
@@ -1382,19 +1378,30 @@ p {
 
 @media (max-width: 1000px) {
     #merch-empire-grid {
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: 1fr !important;
+        grid-template-areas: 
+            "visual"
+            "text" 
+            "controls" !important;
         text-align: left !important;
-        gap: 20px !important;
+        gap: 30px !important;
+        margin: 40px auto !important;
+    }
+    #merch-empire-visual {
+        min-height: 400px !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     .merch-empire-details {
-        padding-left: 10px !important;
+        padding-left: 0 !important;
         align-items: flex-start !important;
     }
     .merch-empire-swatches {
         justify-content: flex-start !important;
     }
     .merch-empire-visual img {
-        max-width: 100% !important;
+        max-width: 90% !important;
+        margin: 0 auto !important;
     }
 }
 
