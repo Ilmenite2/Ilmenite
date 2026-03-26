@@ -302,9 +302,43 @@ const VAPI_PUBLIC_KEY = '6048d665-b4a4-48a2-ac93-d56e01703987';
 const VAPI_ASSISTANT_ID = 'a7842df6-67b3-4978-bdd5-705daff1ffba';
 
 let vapiInstance = null;
-const vapiButton = document.getElementById('vapi-start-button'); // Fixed ID
-const endButton = document.getElementById('vapi-end-button');
-const overlay = document.getElementById('vapi-overlay');
+let vapiButton = null;
+let endButton = null;
+let overlay = null;
+
+function setupVapiInteractions() {
+    vapiButton = document.getElementById('vapi-start-button');
+    endButton = document.getElementById('vapi-end-button');
+    overlay = document.getElementById('vapi-overlay');
+
+    if (vapiButton) {
+        setTimeout(initVapi, 500);
+        vapiButton.addEventListener('click', async () => {
+            if (!vapiInstance) await initVapi();
+            if (vapiInstance) {
+                vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
+                haptic([20, 20, 20, 50, 20, 50, 20, 50]);
+                
+                // Connection Timeout
+                const connectionTimeout = setTimeout(() => {
+                    vapiButton.innerHTML = 'Speak with Atsh';
+                    showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
+                }, 10000);
+
+                vapiInstance.once('call-start', () => clearTimeout(connectionTimeout));
+                vapiInstance.once('error', () => clearTimeout(connectionTimeout));
+
+                vapiInstance.start(VAPI_ASSISTANT_ID);
+            }
+        });
+    }
+
+    if (endButton) {
+        endButton.addEventListener('click', () => {
+            if (vapiInstance) vapiInstance.stop();
+        });
+    }
+}
 
 /**
  * Initialize Vapi and setup listeners
@@ -351,29 +385,19 @@ const initVapi = async () => {
             
             let msg = "VAPI ERROR: CONNECTION RESTRICTED.";
             if (window.location.protocol === 'file:') {
-                msg = "SECURITY: OPEN ON LOCALHOST OR HTTPS FOR VOICE AI.";
+                msg = "SECURITY: PLEASE RUN ON LOCALHOST OR HTTPS.";
             } else if (e.message && e.message.includes('mic')) {
                 msg = "PERMISSION: MICROPHONE ACCESS BLOCKED.";
+            } else if (e.message && e.message.includes('key')) {
+                msg = "AUTH: INVALID VAPI PUBLIC KEY.";
             }
-            showAlert(msg);
+            showNotification(msg);
         });
     } catch (err) {
         console.error('Error creating Vapi instance:', err);
     }
 };
 
-if (vapiButton) {
-    setTimeout(initVapi, 500);
-    vapiButton.addEventListener('click', async () => {
-        if (!vapiInstance) await initVapi();
-        if (vapiInstance) {
-            vapiButton.innerHTML = '<span class="vapi-spinner"></span> Connecting...';
-            // Syncopated Haptic Pattern for Connecting
-            haptic([20, 20, 20, 50, 20, 50, 20, 50]);
-            vapiInstance.start(VAPI_ASSISTANT_ID);
-        }
-    });
-}
 
 /**
  * --- KINETIC MERCHANDISE INTERFACE ---
@@ -538,6 +562,7 @@ function initExecutiveInteractions() {
 // Global Activation
 // Global Activation (Final Unified)
 window.addEventListener('load', () => {
+    setupVapiInteractions(); // Restored
     initHeroCanvas();
     initKineticDrift();
     initExecutiveInteractions();
@@ -564,27 +589,34 @@ function initIntersectionObserver() {
 }
 
 /**
- * Detect In-App Browsers (Instagram, Facebook) to warn about audio issues
+ * Detect In-App Browsers (Instagram, Facebook) for analytics
  */
 function detectInAppBrowser() {
-    // Analytics only - no longer showing ugly banner on load
     const ua = navigator.userAgent || navigator.vendor || window.opera;
     return (ua.indexOf('Instagram') > -1) || (ua.indexOf('FBAN') > -1);
 }
 
 /**
- * Show a premium executive toast message
+ * Show a premium executive notification toast
  */
-function showAlert(msg) {
-    const alert = document.getElementById('browser-alert');
-    if (!alert) return;
+function showNotification(msg) {
+    const container = document.getElementById('executive-notifications');
+    if (!container) return;
     
-    alert.textContent = msg;
-    alert.classList.add('active');
+    const toast = document.createElement('div');
+    toast.className = 'notification-toast';
+    toast.textContent = msg;
     
+    container.appendChild(toast);
+    
+    // Force reflow for animation
+    setTimeout(() => toast.classList.add('active'), 10);
+    
+    // Auto-remove
     setTimeout(() => {
-        alert.classList.remove('active');
-    }, 6000);
+        toast.classList.remove('active');
+        setTimeout(() => toast.remove(), 600);
+    }, 5000);
 }
 
 /**
