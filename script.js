@@ -319,7 +319,7 @@ function setupVapiInteractions() {
                 haptic([20, 20, 20, 50, 20, 50, 20, 50]);
                 
                 const connectionTimeout = setTimeout(() => {
-                    btn.innerHTML = btn.id === 'vapi-start-button' ? 'Try It' : 'Try It';
+                    btn.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
                     showNotification("VAPI TIMEOUT: CHECK CONNECTION.");
                 }, 12000);
 
@@ -332,7 +332,7 @@ function setupVapiInteractions() {
             }
         } catch (err) {
             console.error('Vapi Start Error:', err);
-            btn.innerHTML = btn.id === 'vapi-start-button' ? 'Try It' : 'Try It';
+            btn.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
             showNotification("VAPI ERROR: " + (err.message || "FAILED TO START"));
         }
     };
@@ -353,83 +353,65 @@ function setupVapiInteractions() {
     }
 }
 
-
 /**
-/**
- * Initialize Vapi with retry polling — SDK may load slightly after page
+ * Initialize Vapi - Core SDK version (UMD)
  */
 const initVapi = async () => {
     if (vapiInstance) return;
 
-    // SDK Polling (Max 10s)
-    let attempts = 0;
-    const maxAttempts = 20;
+    // SDK check on window (from script tag)
+    const VapiConstructor = window.vapiSDK || window.Vapi;
 
-    const tryInit = async () => {
-        if (vapiInstance) return;
-        attempts++;
+    if (!VapiConstructor) {
+        console.error('Vapi SDK not found on window object.');
+        return;
+    }
 
-        const VapiConstructor = window.Vapi || 
-                              (window.Vapi && window.Vapi.default) ||
-                              window.VapiSDK || 
-                              (window.vapiSDK ? window.vapiSDK.default : null) || 
-                              (typeof vapiSDK !== 'undefined' ? vapiSDK : null);
+    try {
+        vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
+        console.log('Vapi initialized successfully');
 
-        if (!VapiConstructor) {
-            if (attempts < maxAttempts) {
-                setTimeout(tryInit, 500);
-            } else {
-                console.error('Vapi SDK failed to load after 10s.');
-                showNotification("VAPI ERROR: SDK NOT AVAILABLE");
+        vapiInstance.on('call-start', () => {
+            haptic([100, 50, 100]);
+            if (vapiButton) vapiButton.innerHTML = 'Assisting...';
+            if (overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-            return;
-        }
+            if (typeof initVisualizer === 'function') initVisualizer();
+            showNotification('CONNECTION ESTABLISHED | ATTACHÉ LIVE');
+        });
 
-        try {
-            vapiInstance = new VapiConstructor(VAPI_PUBLIC_KEY);
-            console.log('Vapi initialized successfully (attempt ' + attempts + ')');
+        vapiInstance.on('volume-level', (volume) => {
+            if (typeof sphereVisualizer !== 'undefined' && sphereVisualizer) {
+                sphereVisualizer.updateVolume(volume);
+            }
+        });
 
-            vapiInstance.on('call-start', () => {
-                haptic([100, 50, 100]);
-                if (vapiButton) vapiButton.innerHTML = 'Assisting...';
-                if (overlay) {
-                    overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-                if (typeof initVisualizer === 'function') initVisualizer();
-                showNotification('CONNECTION ESTABLISHED | ATTACHÉ LIVE');
-            });
+        vapiInstance.on('speech-start', () => {
+            showNotification('INPUT: SPEECH DETECTED');
+        });
 
-            vapiInstance.on('volume-level', (volume) => {
-                if (typeof sphereVisualizer !== 'undefined' && sphereVisualizer) {
-                    sphereVisualizer.updateVolume(volume);
-                }
-            });
+        vapiInstance.on('call-end', () => {
+            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
-            vapiInstance.on('call-end', () => {
-                if (vapiButton) vapiButton.innerHTML = 'Try It';
-                if (overlay) overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-
-            vapiInstance.on('error', (e) => {
-                console.error('Vapi Error:', e);
-                if (vapiButton) vapiButton.innerHTML = 'Try It';
-                let msg = 'VAPI ERROR: CONNECTION RESTRICTED.';
-                if (window.location.protocol === 'file:') {
-                    msg = 'SECURITY: RUN ON LOCALHOST OR HTTPS.';
-                } else if (e.message && e.message.includes('mic')) {
-                    msg = 'PERMISSION: MICROPHONE BLOCKED.';
-                }
-                showNotification(msg);
-            });
-
-        } catch (err) {
-            console.error('Vapi Constructor Error:', err);
-        }
-    };
-
-    tryInit();
+        vapiInstance.on('error', (e) => {
+            console.error('Vapi Error:', e);
+            if (vapiButton) vapiButton.innerHTML = 'TRY THE ATTACHÉ EXPERIENCE';
+            let msg = 'VAPI ERROR: CONNECTION RESTRICTED.';
+            if (window.location.protocol === 'file:') {
+                msg = 'SECURITY: RUN ON LOCALHOST OR HTTPS.';
+            } else if (e.message && e.message.includes('mic')) {
+                msg = 'PERMISSION: MICROPHONE BLOCKED.';
+            }
+            showNotification(msg);
+        });
+    } catch (err) {
+        console.error('Error creating Vapi instance:', err);
+    }
 };
 
 

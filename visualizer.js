@@ -136,7 +136,8 @@ class VertexSphereVisualizer {
             const dist = Math.sqrt(x*x + y*y + z*z);
             
             // Ocean wave effect using Sine waves + volume displacement
-            const wave = Math.sin(x * 2 + this.time * 2) * Math.cos(y * 2 + this.time * 1.5) * (0.1 + this.volume * 0.5);
+            const wave = Math.sin(x * 2 + this.time * 2) * Math.cos(y * 2 + this.time * 1.5) * (0.1 + this.volume * 1.5);
+
             
             const scale = 1 + wave;
             

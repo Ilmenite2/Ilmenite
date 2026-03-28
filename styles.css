@@ -1969,3 +1969,9 @@ section > .container, #contact > .container, .hero > .container {
         max-width: 260px !important;
     }
 }
+/* Hide Vapi Widget Default UI */
+#vapi-support-bubble, 
+.vapi-btn, 
+.vapi-widget-container-is-active {
+    display: none !important;
+}
