@@ -420,6 +420,28 @@ const initVapi = async () => {
  */
 let poloZoomed = false;
 let poloBaseRect = null; // Cache for stable measurement
+let currentProductColor = 'sand';
+let currentProductSide = 'front';
+let showcaseTimer = null;
+
+const poloColours = {
+    'sand': { 
+        front: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c85160b9df6.png',
+        right: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-right-69c85160bbfc9.png'
+    },
+    'black': { 
+        front: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c85160b071a.png',
+        right: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-right-69c85160b119e.png'
+    },
+    'grey': { 
+        front: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c85160b2fbb.png',
+        right: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-right-69c85160b4783.png'
+    },
+    'white': { 
+        front: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c85160c3d97.png',
+        right: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-right-69c85160c6e00.png'
+    }
+};
 
 function getPoloMetrics() {
     const img = document.getElementById('main-product-img');
@@ -475,13 +497,20 @@ function setShowcasePoloPosition() {
     img.style.cursor = 'zoom-out';
 }
 
-function updateProductColor(color, imgSrc, silent = false) {
+function updateProductColor(color, side = 'front', silent = false) {
     const mainImg = document.getElementById('main-product-img');
     const swatches = document.querySelectorAll('.merch-empire-swatch');
 
     if (!mainImg) return;
 
-    mainImg.src = imgSrc;
+    currentProductColor = color;
+    currentProductSide = side;
+
+    const config = poloColours[color];
+    if (config) {
+        mainImg.src = config[side];
+    }
+    
     mainImg.style.opacity = '1';
     
     if (poloZoomed) {
@@ -490,14 +519,21 @@ function updateProductColor(color, imgSrc, silent = false) {
         setDefaultPoloPosition();
     }
 
-    swatches.forEach(s => s.classList.remove('active'));
-    const activeSwatch = Array.from(swatches).find(s => s.title.toLowerCase().includes(color));
-    if (activeSwatch) activeSwatch.classList.add('active');
+    // Swatch UI sync
+    swatches.forEach(s => {
+        s.classList.remove('active');
+        if (s.title.toLowerCase().includes(color)) s.classList.add('active');
+    });
     
     // Only fire haptics for manual user interaction
     if (!silent) {
         haptic([50, 50, 50, 50]);
     }
+}
+
+function toggleProductSide() {
+    const newSide = currentProductSide === 'front' ? 'right' : 'front';
+    updateProductColor(currentProductColor, newSide, false);
 }
 
 function initKineticDrift() {
@@ -510,13 +546,38 @@ function initKineticDrift() {
     // Reset cache on resize
     window.addEventListener('resize', () => { poloBaseRect = null; });
 
-    container.addEventListener('click', () => {
-        if (!isMobile()) return;
-        if (poloZoomed) {
-            setDefaultPoloPosition();
+    // --- Interaction Engine ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = Math.abs(touchEndX - touchStartX);
+        
+        // Horizontal Swipe Detected
+        if (diff > 50) {
+            clearInterval(showcaseTimer); // Stop auto-cycle on manual swipe
+            toggleProductSide();
         } else {
-            setShowcasePoloPosition();
+            // It was a tap
+            if (poloZoomed) {
+                setDefaultPoloPosition();
+            } else {
+                setShowcasePoloPosition();
+            }
         }
+    }, { passive: true });
+
+    container.addEventListener('click', (e) => {
+        if (isMobile()) return; // Handled by touch listeners
+        
+        // PC Interaction: Click flips perspective
+        clearInterval(showcaseTimer);
+        toggleProductSide();
     });
 
     container.addEventListener('mousemove', (e) => {
@@ -687,30 +748,40 @@ function initSlideshow() {
  * Starts on Sand, cycles every 1.5 seconds through all colours.
  */
 function initMerchShowcase() {
-    const colours = [
-        { key: 'sand',  src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-sand-front-69c435e08e97f.png' },
-        { key: 'black', src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-black-front-69c435e0867c3.png' },
-        { key: 'grey',  src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-mouse-grey-front-69c435e088c52.png' },
-        { key: 'white', src: 'Ilmenite Polo Mocks/unisex-premium-pique-polo-shirt-white-front-69c435e094156.png' },
-    ];
+    const keys = Object.keys(poloColours);
     let idx = 0;
-    let showcaseTimer;
+    let sideIdx = 0; // 0 for front, 1 for right
 
-    // Set sand as default instantly, silent
-    updateProductColor(colours[0].key, colours[0].src, true);
+    // Preload all mocks for zero-blink flipping
+    keys.forEach(key => {
+        new Image().src = poloColours[key].front;
+        new Image().src = poloColours[key].right;
+    });
+
+    // Initial silent setup
+    updateProductColor(keys[0], 'front', true);
 
     function advance() {
-        idx = (idx + 1) % colours.length;
-        updateProductColor(colours[idx].key, colours[idx].src, true);
+        if (sideIdx === 0) {
+            sideIdx = 1; // Flip to right
+            updateProductColor(keys[idx], 'right', true);
+        } else {
+            sideIdx = 0; // Back to front, but next color
+            idx = (idx + 1) % keys.length;
+            updateProductColor(keys[idx], 'front', true);
+        }
     }
 
-    showcaseTimer = setInterval(advance, 1500);
+    showcaseTimer = setInterval(advance, 2500); // 2.5s per side = 5s per color
 
-    // Stop auto-cycling when the user manually clicks a swatch
+    // Stop auto-cycling when the user manually interacts
     document.querySelectorAll('.merch-empire-swatch').forEach(swatch => {
         swatch.addEventListener('click', () => {
             clearInterval(showcaseTimer);
-            showcaseTimer = null; // user is in control now
+            showcaseTimer = null;
+            // When manually picking color, always default to front view
+            const colorKey = keys.find(k => swatch.title.toLowerCase().includes(k));
+            if (colorKey) updateProductColor(colorKey, 'front', false);
         });
     });
 }
